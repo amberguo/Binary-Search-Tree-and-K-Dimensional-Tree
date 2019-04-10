@@ -38,16 +38,61 @@ class BST {
       }
 
       /** Given a reference to a Data item, insert a copy of it in this BST.
-       *  Return  true if the item was added to this BST
+       *  Return true if the item was added to this BST
        *  as a result of this call to insert,
        *  false if an item equal to this one was already in this BST.
        *  Note: This function should use only the '<' operator when comparing
        *  Data items. (should not use ==, >, <=, >=)  For the reasoning
        *  behind this, see the assignment writeup.
-       *  TODO
        */
       virtual bool insert(const Data& item) {
-         return false;
+          BSTNode<Data> node = new BSTNode<Data>(item);
+          if(root == nullptr)
+          {
+              // BST is empty
+              root = &node;
+              return true;
+          }
+          // traverse through the tree
+          // use the to_insert var to preserve the ideal location
+          BSTNode<Data> * to_traverse = root;
+          BSTNode<Data> * to_insert = root;
+
+          while(to_traverse!= nullptr)
+          {
+              to_insert = to_traverse;
+              if(item < to_traverse->data )
+              {
+                  // target subtree is to the left of to_traverse
+                  to_traverse = to_traverse->left;
+              } else if (to_traverse->data < item)
+              {
+                  // target subtree is to the right of to_traverse
+                  to_traverse = to_traverse->right;
+              } else
+              {
+                  // data are equal, node is already in the tree
+                  return false;
+              }
+          }
+
+          // comparing item with data in the new node
+          if (item < to_insert->data) 
+          {
+              // item is smaller, to the left
+              to_insert->left = node;
+ 
+          } else if (to_insert->data < item)
+          {
+              // item is bigger, to the right
+              to_insert->right = node;
+          } else
+          {
+              // root data == node data
+              return false;
+          }
+          return true;
+
       }
 
 
@@ -77,7 +122,18 @@ class BST {
        *  TODO  
        */
       unsigned int height() const {
-         return 0;
+         if( root == nullptr)
+         {
+             // empty
+             return -1;
+         } else if ( (root->left == nullptr) && (root->right == nullptr))
+         {
+             // only one node
+             return 0;
+         } else
+         {
+             
+         }
       }
 
 
