@@ -38,7 +38,7 @@ protected:
     unsigned int isize;
     unsigned int iheight;
     
-    // TODO: define a data structure to store current K nearest neighbors
+    //TODO: define a data structure to store current K nearest neighbors
     
 public:
     
