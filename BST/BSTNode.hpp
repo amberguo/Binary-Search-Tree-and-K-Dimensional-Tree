@@ -11,9 +11,10 @@ class BSTNode {
 
 		/** Constructor.  Initialize a BSTNode with the given Data item,
 		 *  no parent, and no children.
-		 *  TODO
 		 */
-		BSTNode(const Data & d) {}
+		BSTNode(const Data & d) : data(d) {
+			left = right = parent = nullptr;
+		}
 
 		BSTNode<Data>* left;
 		BSTNode<Data>* right;
@@ -24,10 +25,36 @@ class BSTNode {
 		 *  PRECONDITION: this BSTNode is a node in a BST.
 		 *  POSTCONDITION:  the BST is unchanged.
 		 *  RETURNS: the BSTNode that is the successor of this BSTNode,
-		 *  or 0 if there is none. TODO
+		 *  or 0 if there is none.
 		 */
 		BSTNode<Data>* successor() {
-			return 0;
+			// assume that current node is in a BST
+			BSTNode<Data>* curr = this;
+			// right child exists
+			if (curr->right != nullptr) {
+				// find the leftmost child in the right part of tree
+				BSTNode<Data>* temp = curr->right;
+				while (curr->right != nullptr) {
+					temp = temp->left;
+				}
+				return temp;
+			}
+
+			// right child does not exists
+			BSTNode<Data>* pa = curr->parent;
+			// find the node which left child is the parent of curr
+			while (pa != nullptr && (curr == pa->right)) {
+				curr = pa;
+				pa = pa->parent;
+			}
+			if (parent == nullptr) {
+				// the node is the last node of BST, i.e. rightmost
+				return 0;
+			}
+			else {
+				return parent;
+			}
+			
 		}
 
 }; 
