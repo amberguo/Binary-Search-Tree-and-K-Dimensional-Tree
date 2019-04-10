@@ -46,11 +46,11 @@ public:
      *  behind this, see the assignment writeup.
      */
     virtual bool insert(const Data& item) {
-        BSTNode<Data> node = new BSTNode<Data>(item);
+        BSTNode<Data> * node = new BSTNode<Data>(item);
         if (root == nullptr)
         {
             // BST is empty
-            root = &node;
+            root = node;
             return true;
         }
         // traverse through the tree
@@ -126,7 +126,7 @@ public:
             else
             {
                 // data are equal, node is already in the tree
-                BSTIterator<Data> iterator = new BSTIterator<Data>(to_traverse);
+                BSTIterator<Data> * iterator = new BSTIterator<Data>(to_traverse);
                 return iterator;
             }
         }
@@ -140,7 +140,7 @@ public:
             target = to_traverse;
             to_traverse = to_traverse->right;
         }
-        BSTIterator<Data> iterator = new BSTIterator<Data>(target);
+        BSTIterator<Data> * iterator = new BSTIterator<Data>(target);
         return iterator;
 
     }
