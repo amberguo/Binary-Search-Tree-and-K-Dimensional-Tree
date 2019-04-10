@@ -27,7 +27,7 @@ class BST {
       /** Default constructor.
         * Initialize an empty BST.
         */
-      BST() : root(0), isize(0), iheight(0) {  }
+      BST() : root(0), isize(0), iheight(-1) {  }
 
 
       /** Default destructor.
@@ -105,7 +105,40 @@ class BST {
        *  TODO
        */
       virtual iterator find(const Data& item) const {
-         return 0; 
+          BSTNode<Data> * to_traverse = root;
+          // traverse through the tree to compare the data field
+          while (to_traverse != nullptr)
+          {
+              if (item < to_traverse->data)
+              {
+                  // target subtree is to the left of to_traverse
+                  to_traverse = to_traverse->left;
+              }
+              else if (to_traverse->data < item)
+              {
+                  // target subtree is to the right of to_traverse
+                  to_traverse = to_traverse->right;
+              }
+              else
+              {
+                  // data are equal, node is already in the tree
+                  BSTIterator<Data> iterator = new BSTIterator<Data>(to_traverse);
+                  return iterator;
+              }
+          }
+
+          // did not find node with same data
+          // return the last node, which is the rightmost node in the tree
+          to_traverse = root;
+          BSTNode<Data> * target = root;
+          while (to_traverse != nullptr)
+          {
+              target = to_traverse;
+              to_traverse = to_traverse->right; 
+          }
+          BSTIterator<Data> iterator = new BSTIterator<Data>(target);
+          return iterator;
+          
       }
 
 
