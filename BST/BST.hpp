@@ -27,7 +27,7 @@ public:
     /** Default constructor.
       * Initialize an empty BST.
       */
-    BST() : root(0), isize(0), iheight(-1) {  }
+    BST() : root(0), isize(0), iheight(0) {  }
 
 
     /** Default destructor.
@@ -35,7 +35,7 @@ public:
       */
     virtual ~BST() {
         isize = 0;
-        iheight = -1;
+        iheight = 0;
         deleteAll(root);
     }
 
