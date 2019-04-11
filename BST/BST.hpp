@@ -254,14 +254,14 @@ private:
         {
             return -1;
         }
-        unsigned int left = getHeight(root->left);
-        unsigned int right = getHeight(root->right);
-        if(left > right )
+        unsigned int leftDep = getHeight(root->left);
+        unsigned int rightDep = getHeight(root->right);
+        if(leftDep > rightDep)
         {
-            return left + 1;
+            return leftDep + 1;
         } else
         {
-            return right + 1;
+            return rightDep + 1;
         }
         
     }
