@@ -253,16 +253,12 @@ private:
         if (root == nullptr)
         {
             return -1;
-        }
-        unsigned int leftDep = getHeight(root->left);
-        unsigned int rightDep = getHeight(root->right);
-        if(leftDep > rightDep)
-        {
-            return leftDep + 1;
         } else
         {
-            return rightDep + 1;
+            return 1 + max( getHeight(root->left), getHeight(root->right) );
         }
+        
+        
         
     }
     
