@@ -252,7 +252,7 @@ private:
     {
         if (root == nullptr)
         {
-            return 0;
+            return -1;
         }
         unsigned int left = getHeight(root->left);
         unsigned int right = getHeight(root->right);
