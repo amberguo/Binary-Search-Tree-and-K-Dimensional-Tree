@@ -208,7 +208,7 @@ private:
             to_traverse = to_traverse->left;
         }
 
-        return to_traverse->data;
+        return to_traverse;
     }
 
     /** do a postorder traversal, deleting nodes
