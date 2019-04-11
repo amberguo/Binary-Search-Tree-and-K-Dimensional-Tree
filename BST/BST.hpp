@@ -99,7 +99,14 @@ public:
             return false;
         }
         isize++;
-        iheight = height();
+        if ( root->left == nullptr && root->right == nullptr)
+        {
+            iheight = 0; 
+        } else
+        {
+            iheight = height();
+        }
+        
         return true;
 
     }
