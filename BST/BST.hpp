@@ -219,12 +219,15 @@ private:
            recursively delete right sub-tree
            delete current node
            */
-        while(n != nullptr)
-        {
-            deleteAll(n->left);
-            deleteAll(n->right);
-            delete n;
-        }
+         if ( n == nullptr)
+         {
+             return;
+         }
+        
+         deleteAll(n->left);
+         deleteAll(n->right);
+         delete n;
+        
     }
 
     /** Helper method for size()
