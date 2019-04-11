@@ -54,7 +54,6 @@ public:
             // BST is empty
             root = node;
             isize++;
-            iheight++;
             return true;
         }
         // traverse through the tree
