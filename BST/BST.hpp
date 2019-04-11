@@ -127,7 +127,7 @@ public:
             {
                 // data are equal, node is already in the tree
                 BSTIterator<Data> * iterator = new BSTIterator<Data>(to_traverse);
-                return iterator;
+                return *iterator;
             }
         }
 
@@ -141,7 +141,7 @@ public:
             to_traverse = to_traverse->right;
         }
         BSTIterator<Data> * iterator = new BSTIterator<Data>(target);
-        return iterator;
+        return *iterator;
 
     }
 
