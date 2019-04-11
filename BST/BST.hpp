@@ -34,6 +34,8 @@ public:
       * Delete every node in this BST.
       */
     virtual ~BST() {
+        isize = 0;
+        iheight = -1;
         deleteAll(root);
     }
 
@@ -51,6 +53,8 @@ public:
         {
             // BST is empty
             root = node;
+            isize++;
+            iheight++;
             return true;
         }
         // traverse through the tree
@@ -95,6 +99,8 @@ public:
             // root data == node data
             return false;
         }
+        isize++;
+        iheight = height();
         return true;
 
     }
@@ -106,7 +112,6 @@ public:
      *  Note: This function should use only the '<' operator when comparing
      *  Data items. (should not use ==, >, <=, >=).  For the reasoning
      *  behind this, see the assignment writeup.
-     *  TODO
      */
     virtual iterator find(const Data& item) const {
         BSTNode<Data> * to_traverse = root;
@@ -146,7 +151,6 @@ public:
     }
 
     /** Return the number of items currently in the BST.
-    *  TODO
     */
     unsigned int size() const {
         return getSize(root);
@@ -155,10 +159,9 @@ public:
     /** Return the height of the BST.
      * The height of an empty tree is -1 and the height of a tree
      * with only one node is 0.
-     *  TODO
      */
     unsigned int height() const {
-        return 0;
+        return getHeight(root);
     }
 
 
@@ -188,23 +191,27 @@ public:
      * recursively traverse left sub-tree
      * print current node data
      * recursively traverse right sub-tree
-     * TODO
      */
     void inorder() const {
+        inorderRec();
     }
 
 
 private:
 
     /** Find the first element of the BST
-     *  TODO
      */
     static BSTNode<Data>* first(BSTNode<Data>* root) {
-        return 0;
+        BSTNode<Data> * to_traverse = root;
+        while(to_traverse->left != nullptr)
+        {
+            to_traverse = to_traverse->left;
+        }
+
+        return to_traverse->data;
     }
 
     /** do a postorder traversal, deleting nodes
-     *   TODO
      */
     static void deleteAll(BSTNode<Data>* n) {
         /* Pseudo Code:
@@ -213,8 +220,17 @@ private:
            recursively delete right sub-tree
            delete current node
            */
+        while(n != nullptr)
+        {
+            deleteAll(n->left);
+            deleteAll(n->right);
+            delete n;
+        }
     }
 
+    /** Helper method for size()
+     *  calculate the number of elements in the tree recursively
+     */
     unsigned int getSize(BSTNode<Data> * root) const
     {
         if (root == nullptr)
@@ -222,6 +238,47 @@ private:
             return 0;
         }
         return 1 + getSize(root->left) + getSize(root->right);
+    }
+
+    /** Helper method for size()
+     *  calculate the number of elements in the tree recursively
+     *  Return the height of the BST.
+     *  The height of an empty tree is -1 and the height of a tree
+     *  with only one node is 0.
+     */
+    unsigned int getHeight(BSTNode<Data> * root) const
+    {
+        if (root == nullptr)
+        {
+            return -1;
+        }
+        unsigned int left = getHeight(root->left);
+        unsigned int right = getHeight(root->right);
+        if( left > right )
+        {
+            return left + 1;
+        } else
+        {
+            return right + 1;
+        }
+    }
+    
+    /** Helper method
+     * Inorder traverse BST, print out the data of each node in ascending order.
+     * Implementing inorder and deleteAll base on the pseudo code is an easy way to get started.
+     * Pseudo Code:
+     * if current node is null: return;
+     * recursively traverse left sub-tree
+     * print current node data
+     * recursively traverse right sub-tree
+     */
+    void inorderRec(BSTNode<Data> * root) const {
+        while (root != nullptr)
+        {
+            inorderRec(root->left);
+            cout << root->data << endl;
+            inorderRec(root->right);
+        }
     }
 
 
