@@ -53,6 +53,8 @@ public:
         {
             // BST is empty
             root = node;
+            node->left = nullptr;
+            node->right = nullptr;
             isize++;
             return true;
         }
@@ -86,12 +88,14 @@ public:
         {
             // item is smaller, to the left
             to_insert->left = node;
+            node->parent = to_insert;
 
         }
         else if (to_insert->data < item)
         {
             // item is bigger, to the right
             to_insert->right = node;
+            node->parent = to_insert;
         }
         else
         {
@@ -106,6 +110,7 @@ public:
         {
             iheight = height();
         }
+
         
         return true;
 
