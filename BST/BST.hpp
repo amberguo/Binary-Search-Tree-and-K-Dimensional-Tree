@@ -143,7 +143,7 @@ public:
             else
             {
                 // data are equal, node is already in the tree
-                BSTIterator<Data> * iterator = new BSTIterator<Data>(to_traverse);
+                BSTIterator<Data> * iterator = BSTIterator<Data>(to_traverse);
                 return *iterator;
             }
         }
@@ -155,7 +155,7 @@ public:
         {
             to_traverse = to_traverse->right;
         }
-        BSTIterator<Data> * iterator = new BSTIterator<Data>(to_traverse);
+        BSTIterator<Data> * iterator = BSTIterator<Data>(to_traverse);
         return *iterator;
     }
 
@@ -242,7 +242,7 @@ private:
         {
             deleteAll(n->right);
         }
-        cout << "\n Deleting node: " << n->data
+        cout << "\n Deleting node: " << n->data;
         delete n;
 
         /*deleteAll(n->left);
