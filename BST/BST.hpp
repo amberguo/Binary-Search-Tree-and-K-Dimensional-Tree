@@ -121,6 +121,16 @@ public:
      */
     virtual iterator find(const Data& item) const {
         BSTNode<Data> * to_traverse = root;
+        if(item == NULL)
+        {
+            to_traverse = root;
+            while (to_traverse->right != nullptr)
+            {
+                to_traverse = to_traverse->right;
+            }
+            BSTIterator<Data> * iterator = new BSTIterator<Data>(to_traverse);
+            return *iterator;
+        }
         // traverse through the tree to compare the data field
         while (to_traverse != nullptr)
         {
