@@ -103,15 +103,16 @@ public:
             return false;
         }
         isize++;
-        if ( root->left == nullptr && root->right == nullptr)
+        if (root->left == nullptr && root->right == nullptr)
         {
-            iheight = 0; 
-        } else
+            iheight = 0;
+        }
+        else
         {
             iheight = height();
         }
 
-        
+
         return true;
 
     }
@@ -211,7 +212,7 @@ private:
      */
     static BSTNode<Data>* first(BSTNode<Data>* root) {
         BSTNode<Data> * to_traverse = root;
-        while(to_traverse->left != nullptr)
+        while (to_traverse->left != nullptr)
         {
             to_traverse = to_traverse->left;
         }
@@ -228,15 +229,25 @@ private:
            recursively delete right sub-tree
            delete current node
            */
-         if ( n == nullptr)
-         {
-             return;
-         }
-        
-         deleteAll(n->left);
-         deleteAll(n->right);
-         delete n;
-        
+        if (n == nullptr)
+        {
+            return;
+        }
+
+        if (n->left != nullptr)
+        {
+            deleteAll(n->left);
+        }
+        if (n->right != nullptr)
+        {
+            deleteAll(n->right);
+        }
+        delete n;
+
+        /*deleteAll(n->left);
+        deleteAll(n->right);
+        delete n;*/
+
     }
 
     /** Helper method for size()
@@ -262,23 +273,25 @@ private:
         if (root == nullptr)
         {
             return -1;
-        } else
+        }
+        else
         {
             int leftdep = getHeight(root->left);
             int rightdep = getHeight(root->right);
             if (leftdep > rightdep)
             {
                 return leftdep + 1;
-            } else
+            }
+            else
             {
                 return rightdep + 1;
             }
         }
-        
-        
-        
+
+
+
     }
-    
+
     /** Helper method
      * Inorder traverse BST, print out the data of each node in ascending order.
      * Implementing inorder and deleteAll base on the pseudo code is an easy way to get started.
