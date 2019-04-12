@@ -145,15 +145,12 @@ public:
         // did not find node with same data
         // return the last node, which is the rightmost node in the tree
         to_traverse = root;
-        BSTNode<Data> * target = root;
-        while (to_traverse != nullptr)
+        while (to_traverse->right != nullptr)
         {
-            target = to_traverse;
             to_traverse = to_traverse->right;
         }
-        BSTIterator<Data> * iterator = new BSTIterator<Data>(target);
+        BSTIterator<Data> * iterator = new BSTIterator<Data>(to_traverse);
         return *iterator;
-
     }
 
     /** Return the number of items currently in the BST.
