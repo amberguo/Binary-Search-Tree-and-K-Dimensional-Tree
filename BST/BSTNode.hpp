@@ -1,3 +1,9 @@
+/**
+ * Name: Yingshan Guo
+ * Email: yig152@ucsd.edu
+ * Reference: Piazza
+ * Date: 4/12/2019
+ */
 #ifndef BSTNODE_HPP
 #define BSTNODE_HPP
 #include <iostream>
@@ -5,6 +11,12 @@
 using namespace std;
 
 template<typename Data>
+
+/*
+ * Class Description: This file build individual components of a tree, which
+ * we call "node". The important variables of a node are the data stored,
+ * the parent of this node, and the left- and right- child of that node.
+ */
 class BSTNode {
 
 public:
@@ -24,7 +36,7 @@ public:
     /** Return the successor of this BSTNode in a BST, or 0 if none.
      *  PRECONDITION: this BSTNode is a node in a BST.
      *  POSTCONDITION:  the BST is unchanged.
-     *  RETURNS: the BSTNode that is the successor of this BSTNode,
+     *  @return the BSTNode that is the successor of this BSTNode,
      *  or 0 if there is none.
      */
     BSTNode<Data>* successor() {

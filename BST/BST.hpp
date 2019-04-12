@@ -1,3 +1,10 @@
+/**
+ * Name: Yingshan Guo
+ * Email: yig152@ucsd.edu
+ * Reference: Piazza
+ * Date: 4/12/2019
+ */
+
 #ifndef BST_HPP
 #define BST_HPP
 #include "BSTNode.hpp"
@@ -6,6 +13,13 @@
 using namespace std;
 
 template<typename Data>
+
+/**
+ * Class Description: The driver of building a binary search tree, where 
+ * we record the root, height and size of the tree as class variables.
+ * The important features of a BST are that we can do insert and search
+ * easily with tree structure
+ */
 class BST {
 
 protected:
@@ -46,6 +60,8 @@ public:
      *  Note: This function should use only the '<' operator when comparing
      *  Data items. (should not use ==, >, <=, >=)  For the reasoning
      *  behind this, see the assignment writeup.
+     *  @param item The data of the node that is being inserted
+     *  @return result of inserting
      */
     virtual bool insert(const Data& item) {
         BSTNode<Data> * node = new BSTNode<Data>(item);
@@ -102,7 +118,9 @@ public:
             // root data == node data
             return false;
         }
+        // update the size of tree
         isize++;
+        // update the height of tree
         if (root->left == nullptr && root->right == nullptr)
         {
             iheight = 0;
@@ -124,6 +142,9 @@ public:
      *  Note: This function should use only the '<' operator when comparing
      *  Data items. (should not use ==, >, <=, >=).  For the reasoning
      *  behind this, see the assignment writeup.
+     *  @param item The data of the node that is being searched
+     *  @return the iterator that is pointing to the result, or the 
+     *  last node in the tree if node with item is not found
      */
     virtual iterator find(const Data& item) const {
         BSTNode<Data> * to_traverse = root;
@@ -159,34 +180,35 @@ public:
         return iterator;
     }
 
-    /** Return the number of items currently in the BST.
+    /** @return The number of items currently in the BST.
     */
     unsigned int size() const {
         return getSize(root);
     }
 
-    /** Return the height of the BST.
+    /** 
      * The height of an empty tree is -1 and the height of a tree
      * with only one node is 0.
+     * @return The height of the BST.
      */
     unsigned int height() const {
         return getHeight(root);
     }
 
 
-    /** Return true if the BST is empty, else false.
+    /** @return if the BST is empty, else false.
      */
     bool empty() const {
         return isize == 0;
     }
 
-    /** Return an iterator pointing to the first item in the BST (not the root).
+    /** @return an iterator pointing to the first item in the BST (not the root).
      */
     iterator begin() const {
         return BST::iterator(first(root));
     }
 
-    /** Return an iterator pointing past the last item in the BST.
+    /** @return an iterator pointing past the last item in the BST.
      */
     iterator end() const {
         return typename BST<Data>::iterator(0);
@@ -209,6 +231,8 @@ public:
 private:
 
     /** Find the first element of the BST
+     * @param root Root of the target tree
+     * @return first element of the tree
      */
     static BSTNode<Data>* first(BSTNode<Data>* root) {
         BSTNode<Data> * to_traverse = root;
@@ -221,6 +245,7 @@ private:
     }
 
     /** do a postorder traversal, deleting nodes
+     * @param n Root of tree that is to be deleted
      */
     static void deleteAll(BSTNode<Data>* n) {
         /* Pseudo Code:
@@ -233,7 +258,7 @@ private:
         {
             return;
         }
-
+        // post order deleting
         if (n->left != nullptr)
         {
             deleteAll(n->left);
@@ -242,24 +267,22 @@ private:
         {
             deleteAll(n->right);
         }
-        cout << "\n Deleting node: " << n->data;
         delete n;
-
-        /*deleteAll(n->left);
-        deleteAll(n->right);
-        delete n;*/
-
     }
 
     /** Helper method for size()
      *  calculate the number of elements in the tree recursively
+     *  @param root Root of the tree
+     *  @return size of the tree in unsigned int
      */
     unsigned int getSize(BSTNode<Data> * root) const
     {
+        // base case
         if (root == nullptr)
         {
             return 0;
         }
+        // run through all the nodes and do incrementation
         return 1 + getSize(root->left) + getSize(root->right);
     }
 
@@ -268,17 +291,23 @@ private:
      *  Return the height of the BST.
      *  The height of an empty tree is -1 and the height of a tree
      *  with only one node is 0.
+     *  @param root Root of the tree
+     *  @return height of the tree in unsigned int
      */
     unsigned int getHeight(BSTNode<Data> * root) const
     {
+        // base case
         if (root == nullptr)
         {
             return -1;
         }
         else
         {
+            /* calculate the height by recursively calling on right/left
+            subtrees */
             int leftdep = getHeight(root->left);
             int rightdep = getHeight(root->right);
+            // get the longer path
             if (leftdep > rightdep)
             {
                 return leftdep + 1;
@@ -288,8 +317,6 @@ private:
                 return rightdep + 1;
             }
         }
-
-
 
     }
 
@@ -301,16 +328,17 @@ private:
      * recursively traverse left sub-tree
      * print current node data
      * recursively traverse right sub-tree
+     * @param root Root of the tree
      */
     void inorderRec(BSTNode<Data> * root) const {
         while (root != nullptr)
         {
+            // inorderly traverse and print out the data inside nodes
             inorderRec(root->left);
             cout << root->data << endl;
             inorderRec(root->right);
         }
     }
-
 
 };
 
