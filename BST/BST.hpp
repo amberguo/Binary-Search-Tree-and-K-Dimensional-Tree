@@ -262,7 +262,15 @@ private:
             return -1;
         } else
         {
-            return 1 + max( getHeight(root->left), getHeight(root->right) );
+            int leftdep = getHeight(root->left);
+            int rightdep = getHeight(root->right);
+            if (leftdep > rightdep)
+            {
+                return leftdep + 1;
+            } else
+            {
+                return rightdep + 1;
+            }
         }
         
         
