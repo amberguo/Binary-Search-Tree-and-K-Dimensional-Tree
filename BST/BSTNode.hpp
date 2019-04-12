@@ -29,11 +29,11 @@ public:
      */
     BSTNode<Data>* successor() {
         // assume that current node is in a BST
-        BSTNode<Data>* const curr = this;
+        BSTNode<Data>* const current = this;
         // right child exists
-        if (curr->right != nullptr) {
+        if (current->right != nullptr) {
             // find the leftmost child in the right part of tree
-            BSTNode<Data>* temp = curr->right;
+            BSTNode<Data>* temp = current->right;
             while (temp->left != nullptr) {
                 temp = temp->left;
             }
@@ -41,10 +41,10 @@ public:
         }
 
         // right child does not exists
-        BSTNode<Data>* pa = curr->parent;
+        BSTNode<Data>* pa = current->parent;
         // find the node which left child is the parent of curr
-        while (pa != nullptr && (curr == pa->right)) {
-            curr = pa;
+        while (pa != nullptr && (current == pa->right)) {
+            current = pa;
             pa = pa->parent;
         }
         if (parent == nullptr) {
