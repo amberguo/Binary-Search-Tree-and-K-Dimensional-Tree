@@ -242,6 +242,7 @@ private:
         {
             deleteAll(n->right);
         }
+        cout << "\n Deleting node: " << n->data
         delete n;
 
         /*deleteAll(n->left);
