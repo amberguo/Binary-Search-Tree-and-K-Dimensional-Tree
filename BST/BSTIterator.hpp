@@ -45,7 +45,7 @@ public:
      * TODO */
     bool operator==(BSTIterator<Data> const & other) const {
         // check if calling obj and other are pointing to the same node
-        if( other.curr == *this)
+        if( other.curr == this->curr)
         {
             return true;
         }
@@ -60,7 +60,7 @@ public:
     /** Inequality test operator. TODO */
     bool operator!=(BSTIterator<Data> const & other) const {
         // check if calling obj and other are not pointing to the same node
-        if (other.curr != *this)
+        if (other.curr != this->curr)
         {
             return true;
         }
