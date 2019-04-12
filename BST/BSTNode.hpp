@@ -29,7 +29,7 @@ public:
      */
     BSTNode<Data>* successor() {
         // assume that current node is in a BST
-        BSTNode<Data>* const current = this;
+        BSTNode<Data>* current = this;
         // right child exists
         if (current->right != nullptr) {
             // find the leftmost child in the right part of tree
