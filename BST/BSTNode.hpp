@@ -34,7 +34,7 @@ public:
         if (curr->right != nullptr) {
             // find the leftmost child in the right part of tree
             BSTNode<Data>* temp = curr->right;
-            while (curr->left != nullptr) {
+            while (temp->left != nullptr) {
                 temp = temp->left;
             }
             return temp;
