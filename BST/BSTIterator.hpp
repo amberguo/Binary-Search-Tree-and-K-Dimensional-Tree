@@ -33,7 +33,7 @@ public:
     /** Post-increment operator. */
     BSTIterator<Data> operator++(int) {
         BSTIterator before = BSTIterator(curr);
-        ++(*this);
+        ++(*this); // increment the value pointed by this, which is successor
         return before;
     }
 
