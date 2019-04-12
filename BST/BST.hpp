@@ -143,8 +143,8 @@ public:
             else
             {
                 // data are equal, node is already in the tree
-                BSTIterator<Data> * iterator = BSTIterator<Data>(to_traverse);
-                return *iterator;
+                BSTIterator<Data> iterator (to_traverse);
+                return iterator;
             }
         }
 
@@ -155,8 +155,8 @@ public:
         {
             to_traverse = to_traverse->right;
         }
-        BSTIterator<Data> * iterator = BSTIterator<Data>(to_traverse);
-        return *iterator;
+        BSTIterator<Data>  iterator (to_traverse);
+        return iterator;
     }
 
     /** Return the number of items currently in the BST.
