@@ -78,7 +78,6 @@ int main() {
 
 	cout << "traversal using iterator:" << endl;
 	vit = v.begin();
-	cout << "vit is " << *vit << endl;
 	BST<int>::iterator en = b.end();
 	BST<int>::iterator it = b.begin();
 	for(; vit != ven; ++vit) {
@@ -92,7 +91,6 @@ int main() {
 			return -1;
 		}
 		++it;
-		
 	}
 
 	cout << "OK." << endl;
@@ -129,8 +127,6 @@ int main() {
 			cout << "Error. Expected: " << *nit << "\n";
 			return -1;
 		}
-		//BSTNode<string> * haha = (*(bit.curr)).successor();
-		//cout << haha->data  << endl;
 		nit++;
 	}
 
