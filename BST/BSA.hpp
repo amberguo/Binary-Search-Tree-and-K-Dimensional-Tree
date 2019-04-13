@@ -84,7 +84,7 @@ public:
     virtual bool insert(const Data& item) {
         // traverse the vector and find target item
         // if exists, duplicated
-        for (auto it = v.cbegin(); it != v.cend(); ++it)
+        for (auto it = v.begin(); it != v.end(); ++it)
         {
             if (*it < item || item < *it)
             {
@@ -99,7 +99,7 @@ public:
         }
 
         size_t position = binarySearch(item);
-        auto it = v.cbegin();
+        auto it = v.begin();
         for( size_t i = 0; i<position ; i++)
         {
             ++it;
