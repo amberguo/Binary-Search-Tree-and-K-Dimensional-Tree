@@ -22,86 +22,74 @@ private:
      * or else find where it should be inserted.
      */
     virtual size_t binarySearch(const Data& item) const {
-        size_t result = binarySearchHelper(this->v, 0, v.size() - 1, item);
-        if(result == ((unsigned int)-1))
-        {
-            return whereToInsert(v, v.size(), item);
-        }
-        return result;
+        return binarySearchHelper(this->v, item);
+        //if (result == INT_MAX)
+        //{
+        //    return whereToInsert(v, v.size(), item);
+        //}
+        //return result;
         
     }
 
-    virtual size_t binarySearchHelper(vector<Data> v, int left, int right, 
+    virtual size_t binarySearchHelper(vector<Data> v, 
         const Data& toSearch) const {
-        int mid = (left + right) / 2;
-        if( left <= right )
-        {
-            
-            if (v.at(mid) == toSearch)
-                return mid;
-            if (v.at(mid) < toSearch)
-                return binarySearchHelper(v, mid + 1, right, toSearch);
-            return binarySearchHelper(v, left,mid-1, toSearch);
-        }
-
-        return -1;
-        //whereToInsert(v, v.size(), toSearch);
-
-        //if(v.size() == 0)
-        //{
-        //    return 0;
-        //}
-
-        //while (min <= max)
-        //{
-        //    mid = (max + min) / 2;
-        //    // if at the middle point
-        //    if (v.at(mid) == toSearch)
-        //    {
-        //        return mid;
-        //    }
-        //    // if at the second half
-        //    else if (v.at(mid) < toSearch)
-        //    {
-        //        min = mid + 1;
-        //    }
-        //    // if at the first half
-        //    else
-        //    {
-        //        max = mid - 1;
-        //    }
-        //}
-        // not in the array, find where it should be inserted
-
-
-    }
-
-    size_t whereToInsert(vector<Data> v, size_t size,
-                                 const Data& toSearch) const {
-        if(size == 0 )
+        if(v.size() == 0)
         {
             return 0;
         }
-        if( size == 1)
+        int start = 0;
+        int end = v.size() - 1;
+        while(start + 1 < end )
+        {
+            int mid = start + (end - start) / 2;
+            if (v.at(mid) < toSearch)
+            {
+                start = mid;
+            } else
+            {
+                end = mid;
+            } 
+        }
+        if( toSearch < v.at(start) ) 
+        {
+            return start;
+        } else if (v.at(start)<toSearch && toSearch < v.at(end))
+        {
+            return start + 1;
+        } else if (v.at(end) < toSearch)
+        {
+            return end + 1;
+        }
+
+    }
+
+    /*size_t whereToInsert(vector<Data> v, size_t size,
+        const Data& toSearch) const {
+        if (size == 0)
+        {
+            return 0;
+        }
+        if (size == 1)
         {
             if (v.at(0) < toSearch)
             {
                 return 1;
-            } else
+            }
+            else
             {
                 return 0;
             }
         }
         int k = 0;
-        for (; k < size-1 ; k++)
+        for (; k < size - 1; k++)
         {
             if ((v.at(k) < toSearch) && toSearch < v.at(k + 1))
             {
                 return k + 1;
             }
         }
-        return k+1;
-    }
+        return k + 1;
+    }*/
 
 public:
     /** Return the position of item, otherwise v.cend() */
