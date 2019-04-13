@@ -27,7 +27,8 @@ public:
         std::chrono::time_point<std::chrono::high_resolution_clock> end;
         end = std::chrono::high_resolution_clock::now();
         
-        return (long long)std::chrono::duration_cast<std::chrono::nanoseconds>(end - start).count();
+        return (long long)std::chrono::duration_cast<std::chrono::nanoseconds>
+        (end - start).count();
     }
     
     

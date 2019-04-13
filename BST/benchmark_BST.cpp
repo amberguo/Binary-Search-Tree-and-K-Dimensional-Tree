@@ -39,17 +39,38 @@ int main () {
     Timer t;
     long long sumTime = 0;
     long long averageTime = 0;
-    
-    // TODO
+
+    for(int i =0; i< NUM_RUN; i++)
+    {
+        t.begin_timer();
+        bsa = BSA<double>();
+        for( int j = 0; j< NUM_INSERT; j++)
+        {
+            bsa.insert(insertData.at(j));
+        }
+        sumTime = sumTime + t.end_timer();
+    }
+    averageTime = sumTime / NUM_RUN;
     
     cout << "Average time taken to insert for BSA: " << averageTime
     << " milliseconds" << endl;
     
     sumTime = 0;
     averageTime = 0;
-    
-    // TODO
-    
+   
+    for (int i = 0; i < NUM_RUN; i++)
+    {
+        t.begin_timer();
+        bst = BST<double>();
+        for (int j = 0; j < NUM_INSERT; j++)
+        {
+            bst.insert(insertData.at(j));
+        }
+        sumTime = sumTime + t.end_timer();
+    }
+    averageTime = sumTime / NUM_RUN;
+
+
     cout << "Average time taken to insert for BST: " << averageTime
     << " milliseconds" << endl;
     
@@ -62,7 +83,17 @@ int main () {
     sumTime = 0;
     averageTime = 0;
     
-    // TODO
+    for (int i = 0; i < NUM_RUN; i++)
+    {
+        t.begin_timer();
+        bsa = BSA<double>();
+        for (int j = 0; j < NUM_FIND; j++)
+        {
+            bsa.find(findData.at(j));
+        }
+        sumTime = sumTime + t.end_timer();
+    }
+    averageTime = sumTime / NUM_RUN;
     
     cout << "Average time taken to find for BSA: " << averageTime
     << " milliseconds" << endl;
@@ -70,7 +101,17 @@ int main () {
     sumTime = 0;
     averageTime = 0;
     
-    // TODO
+    for (int i = 0; i < NUM_RUN; i++)
+    {
+        t.begin_timer();
+        bst = BST<double>();
+        for (int j = 0; j < NUM_FIND; j++)
+        {
+            bsa.find(findData.at(j));
+        }
+        sumTime = sumTime + t.end_timer();
+    }
+    averageTime = sumTime / NUM_RUN;
     
     cout << "Average time taken to find for BST: " << averageTime
     << " milliseconds" << endl;
