@@ -25,13 +25,18 @@ private:
         return binarySearchHelper(this->v, item);
     }
 
-    virtual size_t binarySearchHelper(vector<Data> v, 
-                                      const Data& toSearch) const {
+    virtual size_t binarySearchHelper(vector<Data> v,
+        const Data& toSearch) const {
         size_t max = v.size();
         size_t min = 0;
         size_t mid = 0;
-        
-        while(min <= max )
+
+        if(v.size() == 0)
+        {
+            return 0;
+        }
+
+        while (min <= max)
         {
             mid = (max + min) / 2;
             // if at the middle point
@@ -51,15 +56,15 @@ private:
             }
         }
         // not in the array, find where it should be inserted
-        for(size_t i = 0; i< v.size() -1; i++)
+        for (size_t i = 0; i < v.size() - 1; i++)
         {
-            if( (v.at(i) < toSearch) && toSearch < v.at(i+1))
+            if ((v.at(i) < toSearch) && toSearch < v.at(i + 1))
             {
                 return i + 1;
             }
         }
         return 0;
-        
+
     }
 
 public:
@@ -69,10 +74,11 @@ public:
     {
         for (auto it = v.cbegin(); it != v.cend(); ++it)
         {
-            if (*it < item || item < *it )
+            if (*it < item || item < *it)
             {
-                
-            } else
+
+            }
+            else
             {
                 // item = *it
                 return it;
@@ -101,7 +107,7 @@ public:
 
         size_t position = binarySearch(item);
         auto it = v.begin();
-        for( size_t i = 0; i<position ; i++)
+        for (size_t i = 0; i < position; i++)
         {
             ++it;
         }
