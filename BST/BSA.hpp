@@ -22,49 +22,85 @@ private:
      * or else find where it should be inserted.
      */
     virtual size_t binarySearch(const Data& item) const {
-        return binarySearchHelper(this->v, item);
+        size_t result = binarySearchHelper(this->v, 0, v.size() - 1, item);
+        if(result == ((unsigned int)-1))
+        {
+            return whereToInsert(v, v.size(), item);
+        }
+        return result;
+        
     }
 
-    virtual size_t binarySearchHelper(vector<Data> v,
+    virtual size_t binarySearchHelper(vector<Data> v, int left, int right, 
         const Data& toSearch) const {
-        size_t max = v.size();
-        size_t min = 0;
-        size_t mid = 0;
+        int mid = (left + right) / 2;
+        if( left <= right )
+        {
+            
+            if (v.at(mid) == toSearch)
+                return mid;
+            if (v.at(mid) < toSearch)
+                return binarySearchHelper(v, mid + 1, right, toSearch);
+            return binarySearchHelper(v, left,mid-1, toSearch);
+        }
 
-        if(v.size() == 0)
+        return -1;
+        //whereToInsert(v, v.size(), toSearch);
+
+        //if(v.size() == 0)
+        //{
+        //    return 0;
+        //}
+
+        //while (min <= max)
+        //{
+        //    mid = (max + min) / 2;
+        //    // if at the middle point
+        //    if (v.at(mid) == toSearch)
+        //    {
+        //        return mid;
+        //    }
+        //    // if at the second half
+        //    else if (v.at(mid) < toSearch)
+        //    {
+        //        min = mid + 1;
+        //    }
+        //    // if at the first half
+        //    else
+        //    {
+        //        max = mid - 1;
+        //    }
+        //}
+        // not in the array, find where it should be inserted
+
+
+    }
+
+    size_t whereToInsert(vector<Data> v, size_t size,
+                                 const Data& toSearch) const {
+        if(size == 0 )
         {
             return 0;
         }
-
-        while (min <= max)
+        if( size == 1)
         {
-            mid = (max + min) / 2;
-            // if at the middle point
-            if (v.at(mid) == toSearch)
+            if (v.at(0) < toSearch)
             {
-                return mid;
-            }
-            // if at the second half
-            else if (v.at(mid) < toSearch)
+                return 1;
+            } else
             {
-                min = mid + 1;
-            }
-            // if at the first half
-            else
-            {
-                max = mid - 1;
+                return 0;
             }
         }
-        // not in the array, find where it should be inserted
-        for (size_t i = 0; i < v.size() - 1; i++)
+        int k = 0;
+        for (; k < size-1 ; k++)
         {
-            if ((v.at(i) < toSearch) && toSearch < v.at(i + 1))
+            if ((v.at(k) < toSearch) && toSearch < v.at(k + 1))
             {
-                return i + 1;
+                return k + 1;
             }
         }
-        return 0;
-
+        return k+1;
     }
 
 public:
