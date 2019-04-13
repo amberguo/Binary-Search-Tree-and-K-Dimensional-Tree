@@ -13,7 +13,7 @@ using namespace std;
 template<typename Data>
 
 /*
- * Class Description: This file build individual components of a tree, which
+ * Class Description: This class builds individual components of a tree, which
  * we call "node". The important variables of a node are the data stored,
  * the parent of this node, and the left- and right- child of that node.
  */

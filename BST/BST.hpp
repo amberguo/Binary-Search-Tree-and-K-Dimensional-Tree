@@ -15,7 +15,7 @@ using namespace std;
 template<typename Data>
 
 /**
- * Class Description: The driver of building a binary search tree, where 
+ * Class Description: The driver of building a binary search tree, where
  * we record the root, height and size of the tree as class variables.
  * The important features of a BST are that we can do insert and search
  * easily with tree structure
@@ -143,7 +143,7 @@ public:
      *  Data items. (should not use ==, >, <=, >=).  For the reasoning
      *  behind this, see the assignment writeup.
      *  @param item The data of the node that is being searched
-     *  @return the iterator that is pointing to the result, or the 
+     *  @return the iterator that is pointing to the result, or the
      *  last node in the tree if node with item is not found
      */
     virtual iterator find(const Data& item) const {
@@ -164,7 +164,7 @@ public:
             else
             {
                 // data are equal, node is already in the tree
-                BSTIterator<Data> iterator (to_traverse);
+                BSTIterator<Data> iterator(to_traverse);
                 return iterator;
             }
         }
@@ -176,7 +176,7 @@ public:
         {
             to_traverse = to_traverse->right;
         }
-        BSTIterator<Data>  iterator (to_traverse);
+        BSTIterator<Data>  iterator(to_traverse);
         return iterator;
     }
 
@@ -186,7 +186,7 @@ public:
         return getSize(root);
     }
 
-    /** 
+    /**
      * The height of an empty tree is -1 and the height of a tree
      * with only one node is 0.
      * @return The height of the BST.
@@ -202,7 +202,8 @@ public:
         return isize == 0;
     }
 
-    /** @return an iterator pointing to the first item in the BST (not the root).
+    /** @return an iterator pointing to the first item in the BST 
+     * (not the root).
      */
     iterator begin() const {
         return BST::iterator(first(root));
@@ -215,8 +216,10 @@ public:
     }
 
 
-    /** Inorder traverse BST, print out the data of each node in ascending order.
-     * Implementing inorder and deleteAll base on the pseudo code is an easy way to get started.
+    /** Inorder traverse BST, print out the data of each node in ascending 
+     * order.
+     * Implementing inorder and deleteAll base on the pseudo code is an easy 
+     * way to get started.
      * Pseudo Code:
      * if current node is null: return;
      * recursively traverse left sub-tree
