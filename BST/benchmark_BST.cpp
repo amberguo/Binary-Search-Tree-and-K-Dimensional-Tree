@@ -53,10 +53,9 @@ int main () {
         //cout << bsa.v.size() << endl;
         for( int j = 0; j< NUM_INSERT; j++)
         {
-            //bsa.insert(insertData.at(j));
-            bsa.insert((double)j);
+            bsa.insert(insertData.at(j));
+            //bsa.insert((double)j);
         }
-       // cout << bsa.v.size() << endl;
         sumTime = sumTime + t.end_timer();
     }
     // calculate avg time 
@@ -75,15 +74,13 @@ int main () {
         bst = BST<double>();
         for (int j = 0; j < NUM_INSERT; j++)
         {
-            //bst.insert(insertData.at(j));
-            bst.insert((double)j);
+            bst.insert(insertData.at(j));
+            //bst.insert((double)j);
         }
         sumTime = sumTime + t.end_timer();
     }
     // calculate avg time 
     averageTime = sumTime / NUM_RUN;
-
-    //cout << "bst count " <<bst.size() << endl;
 
 
     cout << "Average time taken to insert for BST: " << averageTime
@@ -106,8 +103,8 @@ int main () {
         t.begin_timer();
         for (int j = 0; j < NUM_FIND; j++)
         {
-            //a = bsa.find(findData.at(j));
-            a = bsa.find(double(j));
+            a = bsa.find(findData.at(j));
+            //a = bsa.find(double(j));
             //if(a != bsa.v.cend())
             //{
             //    v1.push_back(*(a._Ptr));
@@ -132,8 +129,8 @@ int main () {
         t.begin_timer();
         for (int j = 0; j < NUM_FIND; j++)
         {
-            //b = bst.find(findData.at(j));
-            b = bst.find(double(j));
+            b = bst.find(findData.at(j));
+            //b = bst.find(double(j));
             //if(b != nullptr)
             //{
             //    v2.push_back(*b);
@@ -144,19 +141,6 @@ int main () {
     }
     // calculate avg time 
     averageTime = sumTime / NUM_RUN;
-
-    //if( v1.size() != v2.size())
-    //{
-    //    cout << "size not equal" << endl;
-    //}
-    //for(int i =0; i< v1.size(); i++)
-    //{
-    //    if (v1.at(i) != v2.at(i))
-    //    {
-    //        cout << "value not equal" << endl;
-    //        break;
-    //    }
-    //}
     
     cout << "Average time taken to find for BST: " << averageTime
     << " milliseconds" << endl;
