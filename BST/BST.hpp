@@ -177,7 +177,7 @@ public:
     /** @return The number of items currently in the BST.
     */
     unsigned int size() const {
-        return getSize(root);
+        return isize;
     }
 
     /**
@@ -186,7 +186,7 @@ public:
      * @return The height of the BST.
      */
     unsigned int height() const {
-        return getHeight(root);
+        return iheight;
     }
 
 
@@ -266,56 +266,6 @@ private:
             deleteAll(n->right);
         }
         delete n;
-    }
-
-    /** Helper method for size()
-     *  calculate the number of elements in the tree recursively
-     *  @param root Root of the tree
-     *  @return size of the tree in unsigned int
-     */
-    unsigned int getSize(BSTNode<Data> * root) const
-    {
-        // base case
-        if (root == nullptr)
-        {
-            return 0;
-        }
-        // run through all the nodes and do incrementation
-        return 1 + getSize(root->left) + getSize(root->right);
-    }
-
-    /** Helper method for size()
-     *  calculate the number of elements in the tree recursively
-     *  Return the height of the BST.
-     *  The height of an empty tree is -1 and the height of a tree
-     *  with only one node is 0.
-     *  @param root Root of the tree
-     *  @return height of the tree in unsigned int
-     */
-    unsigned int getHeight(BSTNode<Data> * root) const
-    {
-        // base case
-        if (root == nullptr)
-        {
-            return -1;
-        }
-        else
-        {
-            /* calculate the height by recursively calling on right/left
-            subtrees */
-            int leftdep = getHeight(root->left);
-            int rightdep = getHeight(root->right);
-            // get the longer path
-            if (leftdep > rightdep)
-            {
-                return leftdep + 1;
-            }
-            else
-            {
-                return rightdep + 1;
-            }
-        }
-
     }
 
     /** Helper method
