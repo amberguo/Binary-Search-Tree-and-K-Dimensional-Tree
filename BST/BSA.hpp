@@ -33,9 +33,10 @@ private:
 
     virtual size_t binarySearchHelper(vector<Data> v, 
         const Data& toSearch) const {
+        size_t rc = 0;
         if(v.size() == 0)
         {
-            return 0;
+            return rc;
         }
         int start = 0;
         int end = v.size() - 1;
@@ -52,14 +53,21 @@ private:
         }
         if( toSearch < v.at(start) ) 
         {
-            return start;
+            // smaller
+            rc = start;
         } else if (v.at(start)<toSearch && toSearch < v.at(end))
         {
-            return start + 1;
+            // in between
+            rc = start + 1;
         } else if (v.at(end) < toSearch)
         {
-            return end + 1;
+            rc = end + 1;
+        } else
+        {
+            rc = SIZE_MAX;
         }
+
+        return rc;
 
     }
 
@@ -115,21 +123,11 @@ public:
     virtual bool insert(const Data& item) {
         // traverse the vector and find target item
         // if exists, duplicated
-        for (auto it = v.begin(); it != v.end(); ++it)
-        {
-            if (*it < item || item < *it)
-            {
-
-            }
-            else
-            {
-                // item = *it
-                // duplicate 
-                return false;
-            }
-        }
-
         size_t position = binarySearch(item);
+        if( position == SIZE_MAX)
+        {
+            return false;
+        }
         auto it = v.begin();
         for (size_t i = 0; i < position; i++)
         {

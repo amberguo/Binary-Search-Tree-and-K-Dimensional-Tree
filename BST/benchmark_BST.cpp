@@ -23,8 +23,8 @@ int main () {
     // TODO: value to change to do benchmarking
     const int MIN = 0; // min value of random data
     const int MAX = 100; // max value of random data
-    const int NUM_INSERT = 30000; // number of random data to insert
-    const int NUM_FIND = 30000; // number of random data to find
+    const int NUM_INSERT = 10000; // number of random data to insert
+    const int NUM_FIND = 10000; // number of random data to find
     const int NUM_RUN = 10;
     
     vector<double> insertData = randNums(NUM_INSERT, MIN, MAX);
