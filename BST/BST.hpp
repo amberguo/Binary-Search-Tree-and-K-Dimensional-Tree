@@ -10,6 +10,7 @@
 #include "BSTNode.hpp"
 #include "BSTIterator.hpp"
 #include <iostream>
+#include <algorithm>
 using namespace std;
 
 template<typename Data>
@@ -32,6 +33,7 @@ protected:
 
     /** Height of this BST. */
     unsigned int iheight;
+  
 
 public:
 
@@ -41,17 +43,22 @@ public:
     /** Default constructor.
       * Initialize an empty BST.
       */
-    BST() : root(0), isize(0), iheight(0) {  }
+    BST() : root(0), isize(0), iheight(0){  }
 
 
     /** Default destructor.
       * Delete every node in this BST.
       */
     virtual ~BST() {
-        isize = 0;
-        iheight = 0;
+      
         deleteAll(root);
     }
+
+    bool static equalsData(const Data& a, const Data& b)
+    {
+        return !(a < b || b < a);
+    }
+
 
     /** Given a reference to a Data item, insert a copy of it in this BST.
      *  Return true if the item was added to this BST
@@ -64,75 +71,69 @@ public:
      *  @return result of inserting
      */
     virtual bool insert(const Data& item) {
-        BSTNode<Data> * node = new BSTNode<Data>(item);
+        BSTNode<Data> * node = nullptr;
         if (root == nullptr)
         {
             // BST is empty
+            node = new BSTNode<Data>(item);
             root = node;
-            node->left = nullptr;
-            node->right = nullptr;
             isize++;
             return true;
         }
         // traverse through the tree
-        // use the to_insert var to preserve the ideal location
-        BSTNode<Data> * to_traverse = root;
-        BSTNode<Data> * to_insert = root;
-
-        while (to_traverse != nullptr)
+        BSTNode<Data> * ops = root;
+        unsigned int localHeight = 0;
+        while(ops)
         {
-            to_insert = to_traverse;
-            if (item < to_traverse->data)
+            if (equalsData(ops->data, item))
+                return false;
+            // item is smaller than ops
+            // should be in the left subtree
+            if (item < ops->data)
             {
-                // target subtree is to the left of to_traverse
-                to_traverse = to_traverse->left;
-            }
-            else if (to_traverse->data < item)
-            {
-                // target subtree is to the right of to_traverse
-                to_traverse = to_traverse->right;
+                if (ops->left)
+                {
+                    // left node exists, dive deeper
+                    ops = ops->left;
+                }
+                else
+                {
+                    // left node is empty
+                    // create new node and attach it to the tree
+                    node = new BSTNode<Data>(item);
+                    ops->left = node;
+                    node->parent = ops;
+                    localHeight++;
+                    break;
+                }
             }
             else
             {
-                // data are equal, node is already in the tree
-                return false;
-            }
+                // item is greater than ops
+                // should be in the right subtree
+                if (ops->right)
+                {
+                    // right node exists, dive deeper
+                    ops = ops->right;
+                }
+                else
+                {
+                    // right node is empty
+                    // create new node and attach it to the tree
+                    node = new BSTNode<Data>(item);
+                    ops->right = node;
+                    node->parent = ops;
+                    localHeight++;
+                    break;
+                }
+            }     
+            localHeight++;
         }
 
-        // comparing item with data in the new node
-        if (item < to_insert->data)
-        {
-            // item is smaller, to the left
-            to_insert->left = node;
-            node->parent = to_insert;
-
-        }
-        else if (to_insert->data < item)
-        {
-            // item is bigger, to the right
-            to_insert->right = node;
-            node->parent = to_insert;
-        }
-        else
-        {
-            // root data == node data
-            return false;
-        }
-        // update the size of tree
+        // update height, make it the current longest path in the tree
+        iheight = max(iheight, localHeight);
         isize++;
-        // update the height of tree
-        if (root->left == nullptr && root->right == nullptr)
-        {
-            iheight = 0;
-        }
-        else
-        {
-            iheight = height();
-        }
-
-
         return true;
-
     }
 
 
@@ -143,8 +144,8 @@ public:
      *  Data items. (should not use ==, >, <=, >=).  For the reasoning
      *  behind this, see the assignment writeup.
      *  @param item The data of the node that is being searched
-     *  @return the iterator that is pointing to the result, or the
-     *  last node in the tree if node with item is not found
+     *  @return the iterator that is pointing to the result or pointing past
+     *  the last node in the BST if not found.
      */
     virtual iterator find(const Data& item) const {
         BSTNode<Data> * to_traverse = root;
@@ -167,17 +168,10 @@ public:
                 BSTIterator<Data> iterator(to_traverse);
                 return iterator;
             }
+   
         }
-
         // did not find node with same data
-        // return the last node, which is the rightmost node in the tree
-        to_traverse = root;
-        while (to_traverse->right != nullptr)
-        {
-            to_traverse = to_traverse->right;
-        }
-        BSTIterator<Data>  iterator(to_traverse);
-        return iterator;
+        return iterator(nullptr);
     }
 
     /** @return The number of items currently in the BST.
@@ -241,6 +235,7 @@ private:
         BSTNode<Data> * to_traverse = root;
         while (to_traverse->left != nullptr)
         {
+            // find the leftmost element
             to_traverse = to_traverse->left;
         }
 
@@ -325,7 +320,8 @@ private:
 
     /** Helper method
      * Inorder traverse BST, print out the data of each node in ascending order.
-     * Implementing inorder and deleteAll base on the pseudo code is an easy way to get started.
+     * Implementing inorder and deleteAll base on the pseudo code is an easy 
+     * way to get started.
      * Pseudo Code:
      * if current node is null: return;
      * recursively traverse left sub-tree

@@ -1,0 +1,78 @@
+/**
+ * Name: Yingshan Guo
+ * Email: yig152@ucsd.edu
+ * Reference: Piazza
+ * Date: 4/13/2019
+ */
+
+[cs100sp19de@ieng6-240]:BST:449$ ./benchmark_bst
+Insert benchmarking for BSA and BST:
+Number of data to insert: 200
+Average time taken to insert for BSA: 827678 milliseconds
+Average time taken to insert for BST: 110490 milliseconds
+
+Find benchmarking for BSA and BST:
+Number of data in BSA/BST: 200
+Number of data to find: 200
+Average time taken to find for BSA: 449607 milliseconds
+Average time taken to find for BST: 46850 milliseconds
+
+
+[cs100sp19de@ieng6-240]:BST:451$ ./benchmark_bst
+Insert benchmarking for BSA and BST:
+Number of data to insert: 4000
+Average time taken to insert for BSA: 20853006 milliseconds
+Average time taken to insert for BST: 3038698 milliseconds
+
+Find benchmarking for BSA and BST:
+Number of data in BSA/BST: 4000
+Number of data to find: 4000
+Average time taken to find for BSA: 13054756 milliseconds
+Average time taken to find for BST: 1223813 milliseconds
+
+
+[cs100sp19de@ieng6-240]:BST:452$ ./benchmark_bst
+Insert benchmarking for BSA and BST:
+Number of data to insert: 30000
+Average time taken to insert for BSA: 159299368 milliseconds
+Average time taken to insert for BST: 22795642 milliseconds
+
+Find benchmarking for BSA and BST:
+Number of data in BSA/BST: 30000
+Number of data to find: 30000
+Average time taken to find for BSA: 118473729 milliseconds
+Average time taken to find for BST: 11368952 milliseconds
+
+
+
+1.Which data structure was faster for insert()?
+ From the above data, we can find that BST is faster in insert()
+
+
+2.Which data structure was faster for find()?
+ From the above data, we can find that BSA is faster in insert()
+
+
+3. Was there a significant difference that can be explained by the 
+differences between the two data structures?
+ For insert() and find() in BST and BSA, the time complexities are O(logn).
+The difference between time, however, is caused by constant multiplier, not by
+growth rate. 
+ But this requires BST to be relatively balanced, which means if BST is heavily
+skewed, the time complexity of insert and find would be O(n).
+
+Insert benchmarking for BSA and BST:
+Number of data to insert: 3000
+Average time taken to insert for BSA: 16668680 milliseconds
+Average time taken to insert for BST: 92469802 milliseconds
+
+Find benchmarking for BSA and BST:
+Number of data in BSA/BST: 3000
+Number of data to find: 3000
+Average time taken to find for BSA: 12268470 milliseconds
+Average time taken to find for BST: 16867883 milliseconds
+
+For this set of data, I used the nonrandom data instead (0,1,2,3,...), to insert
+and find in the BSA and BST.
+As we can see, the efficiency of BST now is outperformed by BSA, due to the fact
+that the BST is no longer balanced.

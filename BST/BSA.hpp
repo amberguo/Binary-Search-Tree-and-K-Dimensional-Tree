@@ -16,23 +16,16 @@ template<typename Data>
 class BSA {
 
 private:
-    vector<Data> v;
+    
 
     /** Helper method used to either find an element if it exists
      * or else find where it should be inserted.
      */
     virtual size_t binarySearch(const Data& item) const {
-        return binarySearchHelper(this->v, item);
-        //if (result == INT_MAX)
-        //{
-        //    return whereToInsert(v, v.size(), item);
-        //}
-        //return result;
-        
+        return binarySearchHelper(item);
     }
 
-    virtual size_t binarySearchHelper(vector<Data> v, 
-        const Data& toSearch) const {
+    virtual int binarySearchHelper(const Data& toSearch) const {
         size_t rc = 0;
         if(v.size() == 0)
         {
@@ -71,51 +64,54 @@ private:
 
     }
 
-    /*size_t whereToInsert(vector<Data> v, size_t size,
-        const Data& toSearch) const {
-        if (size == 0)
+    virtual int binarySearchFind(const Data& toSearch) const {
+        if (v.empty())
         {
             return 0;
         }
-        if (size == 1)
+        int start = 0;
+        int end = v.size() - 1;
+        while (start + 1 < end)
         {
-            if (v.at(0) < toSearch)
+            int mid = start + (end - start) / 2;
+            if (v.at(mid) < toSearch)
             {
-                return 1;
+                start = mid;
             }
             else
             {
-                return 0;
+                end = mid;
             }
         }
-        int k = 0;
-        for (; k < size - 1; k++)
+        if (equalsData(v.at(start), toSearch) )
         {
-            if ((v.at(k) < toSearch) && toSearch < v.at(k + 1))
-            {
-                return k + 1;
-            }
+            return start;
+        } else if (equalsData(v.at(end), toSearch))
+        {
+            return end;
         }
-        return k + 1;
-    }*/
+        return -1;
+
+    }
+    bool static equalsData(const Data& a, const Data& b)
+    {
+        return !(a < b || b < a);
+    }
+
 
 public:
+    vector<Data> v;
     /** Return the position of item, otherwise v.cend() */
     virtual typename vector<Data>::const_iterator find(const Data& item)
         const
     {
-        for (auto it = v.cbegin(); it != v.cend(); ++it)
+        int idx = binarySearchFind(item);
+        if( idx != -1)
         {
-            if (*it < item || item < *it)
-            {
-
-            }
-            else
-            {
-                // item = *it
-                return it;
-            }
+            auto nth = v.begin() + idx;
+            return nth;
         }
+
         return v.cend();
     }
 
@@ -128,12 +124,7 @@ public:
         {
             return false;
         }
-        auto it = v.begin();
-        for (size_t i = 0; i < position; i++)
-        {
-            ++it;
-        }
-        v.insert(it, item);
+        v.insert(v.begin() + position, item);
         return true;
     }
 
