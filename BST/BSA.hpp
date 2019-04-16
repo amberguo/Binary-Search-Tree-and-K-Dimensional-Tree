@@ -25,6 +25,7 @@ private:
      * inserted
      */
     virtual size_t binarySearch(const Data& item) const {
+        const int MIDDLE_DIVISOR = 2;
         size_t rc = 0;
         // base case
         if (v.empty())
@@ -36,7 +37,7 @@ private:
         // modify the value of start and end
         while (start + 1 < end)
         {
-            int mid = start + (end - start) / 2;
+            int mid = start + (end - start) / MIDDLE_DIVISOR;
             // target is in the second part
             if (v.at(mid) < item)
             {
@@ -79,6 +80,7 @@ private:
      * inserted
      */
     virtual int binarySearchFind(const Data& toSearch) const {
+        const int MIDDLE_DIVISOR = 2;
         // base case
         if (v.empty())
         {
@@ -89,7 +91,7 @@ private:
         // modify the value of start and end
         while (start + 1 < end)
         {
-            int mid = start + (end - start) / 2;
+            int mid = start + (end - start) / MIDDLE_DIVISOR;
             // target is in the second part
             if (v.at(mid) < toSearch)
             {

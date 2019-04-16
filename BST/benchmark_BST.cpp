@@ -50,11 +50,9 @@ int main () {
         t.begin_timer();
         // create new object each time
         bsa = BSA<double>();
-        //cout << bsa.v.size() << endl;
         for( int j = 0; j< NUM_INSERT; j++)
         {
             bsa.insert(insertData.at(j));
-            //bsa.insert((double)j);
         }
         sumTime = sumTime + t.end_timer();
         
@@ -76,9 +74,9 @@ int main () {
         for (int j = 0; j < NUM_INSERT; j++)
         {
             bst.insert(insertData.at(j));
-            //bst.insert((double)j);
         }
         sumTime = sumTime + t.end_timer();
+        // freeing the bst leftovers on heap
         if(i != NUM_RUN-1)
         {
             bst.~BST();
@@ -87,7 +85,6 @@ int main () {
     }
     // calculate avg time 
     averageTime = sumTime / NUM_RUN;
-
 
     cout << "Average time taken to insert for BST: " << averageTime
     << " milliseconds" << endl;
@@ -110,12 +107,6 @@ int main () {
         for (int j = 0; j < NUM_FIND; j++)
         {
             a = bsa.find(findData.at(j));
-            //a = bsa.find(double(j));
-            //if(a != bsa.v.cend())
-            //{
-            //    v1.push_back(*(a._Ptr));
-            //}
-            
         }
         sumTime = sumTime + t.end_timer();
     }
@@ -136,12 +127,6 @@ int main () {
         for (int j = 0; j < NUM_FIND; j++)
         {
             b = bst.find(findData.at(j));
-            //b = bst.find(double(j));
-            //if(b != nullptr)
-            //{
-            //    v2.push_back(*b);
-            //}
-            
         }
         sumTime = sumTime + t.end_timer();
     }
