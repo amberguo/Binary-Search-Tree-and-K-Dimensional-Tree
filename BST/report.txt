@@ -72,7 +72,7 @@ Number of data to find: 3000
 Average time taken to find for BSA: 12268470 milliseconds
 Average time taken to find for BST: 16867883 milliseconds
 
-For this set of data, I used the nonrandom data instead (0,1,2,3,...), to insert
-and find in the BSA and BST.
+For this set of data, I used the non-random data instead (0,1,2,3,...), to 
+insert and find in the BSA and BST.
 As we can see, the efficiency of BST now is outperformed by BSA, due to the fact
 that the BST is no longer balanced.

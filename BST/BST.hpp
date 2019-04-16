@@ -54,11 +54,6 @@ public:
         deleteAll(root);
     }
 
-    bool static equalsData(const Data& a, const Data& b)
-    {
-        return !(a < b || b < a);
-    }
-
 
     /** Given a reference to a Data item, insert a copy of it in this BST.
      *  Return true if the item was added to this BST
@@ -257,6 +252,7 @@ private:
             return;
         }
         // post order deleting
+        // left-right-root
         if (n->left != nullptr)
         {
             deleteAll(n->left);
@@ -287,6 +283,17 @@ private:
             cout << root->data << endl;
             inorderRec(root->right);
         }
+    }
+
+    /**
+     * Helper method to see if two data are equal
+     * @param a Data one
+     * @param b Data two
+     * @return true if a and b are equal, false if they are not
+     */
+    bool static equalsData(const Data& a, const Data& b)
+    {
+        return !(a < b || b < a);
     }
 
 };

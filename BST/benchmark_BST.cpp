@@ -57,6 +57,7 @@ int main () {
             //bsa.insert((double)j);
         }
         sumTime = sumTime + t.end_timer();
+        
     }
     // calculate avg time 
     averageTime = sumTime / NUM_RUN;
@@ -78,6 +79,7 @@ int main () {
             //bst.insert((double)j);
         }
         sumTime = sumTime + t.end_timer();
+        bst.~BST();
     }
     // calculate avg time 
     averageTime = sumTime / NUM_RUN;
@@ -138,6 +140,7 @@ int main () {
             
         }
         sumTime = sumTime + t.end_timer();
+        bst.~BST();
     }
     // calculate avg time 
     averageTime = sumTime / NUM_RUN;
