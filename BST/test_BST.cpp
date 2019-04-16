@@ -16,12 +16,22 @@ int main() {
 
 	/* Create an STL vector of some ints */
 	/*test*/
-	vector<int> v;
-	v.push_back(3);
-	v.push_back(4);
-	v.push_back(1);
-	v.push_back(100);
-	v.push_back(-33);
+	//vector<int> v;
+	//v.push_back(3);
+	//v.push_back(4);
+	//v.push_back(1);
+	//v.push_back(100);
+	//v.push_back(-33);
+    vector<int> v;
+    v.push_back(66);
+    v.push_back(77);
+    v.push_back(500);
+    v.push_back(1);
+    v.push_back(-20);
+    v.push_back(-260);
+    v.push_back(10);
+    v.push_back(70);
+
 
 	/* Create an instance of BST holding int */
 	BST<int> b;
@@ -52,7 +62,7 @@ int main() {
 	/* Test height */
 
 	cout << "Height is: " << b.height() << endl;
-	if(b.height() != 2) {
+	if(b.height() != 3) {
 		cout << "... which is incorrect." << endl;
 		return -1;
 	}
