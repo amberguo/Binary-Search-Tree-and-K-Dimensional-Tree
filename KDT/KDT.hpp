@@ -45,7 +45,12 @@ protected:
 public:
     
     /** TODO: Default constructor of KD tree */
-    KDT() {}
+    KDT()
+    {
+        root = nullptr;
+        isize = 0;
+        iheight = 0;
+    }
     
     /** Build the KD tree from the given vector of Point references */
     void build(vector<Point>& points) {
@@ -135,7 +140,7 @@ private:
         {
             // inorderly traverse and print out the data inside nodes
             inorderRec(root->left);
-            for( int i = 0; i< root->point.features.size(); i++)
+            for( int i = 0; i < (root->point.features.size()); i++)
             {
                 cout << root->point.features.at(i) << endl;
             }
