@@ -15,48 +15,18 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="bst\benchmark_BST.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="bst\test_BST.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="kdt\KNNClassifier.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="kdt\runtime.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="kdt\test_KDT.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="bst\BSA.hpp">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="bst\BST.hpp">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="bst\BSTIterator.hpp">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="bst\BSTNode.hpp">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="bst\Timer.hpp">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="kdt\BruteForceKNN.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="kdt\KDT.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="kdt\Point.hpp">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="kdt\Timer.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

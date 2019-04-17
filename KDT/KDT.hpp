@@ -50,6 +50,9 @@ public:
         root = nullptr;
         isize = 0;
         iheight = 0;
+        threshold = std::numeric_limits<double>::infinity();
+        k = 0;
+        numDim = 0;
     }
     
     /** Build the KD tree from the given vector of Point references */
@@ -105,6 +108,7 @@ private:
         sort(points.begin()+start, points.begin()+end, comparator);
         int median = (end + start) / 2;
         KDNode* newRoot = new KDNode(points.at(median));
+        isize++;
         // recursively call, start is inclusive, end is exclusive
         newRoot->left = buildSubtree(points, 0, median, d+1, height);
         newRoot->right = buildSubtree(points, median+1, end, d+1, height);
