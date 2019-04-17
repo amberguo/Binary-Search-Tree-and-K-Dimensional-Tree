@@ -57,9 +57,10 @@ public:
     
     /** Build the KD tree from the given vector of Point references */
     void build(vector<Point>& points) {
+        numDim = points.at(0).numDim;
         root = buildSubtree(points, 0, points.size(), 0, 0);
         // decrement the height to exclude the null node at the end of paths
-        iheight--;
+        //iheight--;
     }
     
     /** Find k nearest neighbors of the given query point */
@@ -98,7 +99,7 @@ private:
             // toggle the dimension
             d = 0;
         }
-        if(start == end)
+        if(start >= end)
         {   
             // base case for recursion
             return nullptr;
@@ -107,11 +108,13 @@ private:
         // initial sorting for all the points
         sort(points.begin()+start, points.begin()+end, comparator);
         int median = (end + start) / 2;
+        
         KDNode* newRoot = new KDNode(points.at(median));
+        cout << "median is " << median << endl;
         isize++;
         // recursively call, start is inclusive, end is exclusive
-        newRoot->left = buildSubtree(points, 0, median, d+1, height);
-        newRoot->right = buildSubtree(points, median+1, end, d+1, height);
+        newRoot->left = buildSubtree(points, start, median, d+1, height+1);
+        newRoot->right = buildSubtree(points, median+1, end, d+1, height+1);
 
         return newRoot;
     }

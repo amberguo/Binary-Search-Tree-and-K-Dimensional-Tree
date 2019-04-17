@@ -98,15 +98,27 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="kdt\test_KDT.cpp" />
-  </ItemGroup>
-  <ItemGroup>
     <ClInclude Include="bst\Timer.hpp" />
     <ClInclude Include="kdt\KDT.hpp" />
     <ClInclude Include="kdt\Point.hpp" />
   </ItemGroup>
   <ItemGroup>
     <None Include=".editorconfig" />
+  </ItemGroup>
+  <ItemGroup>
+    <Text Include="KDT\test\custom_points.txt" />
+    <Text Include="KDT\test\iris.txt" />
+    <Text Include="KDT\test\irisDescription.txt" />
+    <Text Include="KDT\test\queryPoints.txt" />
+    <Text Include="KDT\test\solutionPoints.txt" />
+    <Text Include="KDT\test\test_points.txt" />
+    <Text Include="KDT\test\training.txt" />
+    <Text Include="KDT\test\validation.txt" />
+    <Text Include="KDT\test\wine.txt" />
+    <Text Include="KDT\test\wineDescription.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="KDT\test_KDT.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
