@@ -4,7 +4,9 @@
 #include <algorithm> // sort, max, min
 #include <math.h>    // pow, abs
 #include <vector>    // vector<typename>
+#include <iostream>
 #include "Point.hpp"
+
 
 using namespace std;
 
@@ -99,8 +101,8 @@ private:
         int median = (end + start) / 2;
         KDNode* newRoot = new KDNode(points.at(median));
         // recursively call, start is inclusive, end is exclusive
-        newRoot->left = buildSubtree(points, 0, median, d+1, height+1);
-        newRoot->right = buildSubtree(points, median+1, end, d+1, height+1);
+        newRoot->left = buildSubtree(points, 0, median, d+1, height);
+        newRoot->right = buildSubtree(points, median+1, end, d+1, height);
 
         return newRoot;
     }
@@ -115,6 +117,31 @@ private:
      */
     void updateKNN(Point & point) {
         // TODO
+    }
+
+    /** Helper method
+     * Inorder traverse BST, print out the data of each node in ascending order.
+     * Implementing inorder and deleteAll base on the pseudo code is an easy
+     * way to get started.
+     * Pseudo Code:
+     * if current node is null: return;
+     * recursively traverse left sub-tree
+     * print current node data
+     * recursively traverse right sub-tree
+     * @param root Root of the tree
+     */
+    void inorderRec(KDNode * root) const {
+        while (root != nullptr)
+        {
+            // inorderly traverse and print out the data inside nodes
+            inorderRec(root->left);
+            for( int i = 0; i< root->point.features.size(); i++)
+            {
+                cout << root->point.features.at(i) << endl;
+            }
+            
+            inorderRec(root->right);
+        }
     }
     
 };

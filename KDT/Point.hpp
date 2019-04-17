@@ -28,6 +28,8 @@ public:
     {
         this->features = features;
         this->label = label;
+        this->numDim = features.size();
+
     }
     
     /** Set the square distance to current query point 
