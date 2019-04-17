@@ -140,7 +140,7 @@ private:
         {
             // inorderly traverse and print out the data inside nodes
             inorderRec(root->left);
-            for( int i = 0; i < (root->point.features.size()); i++)
+            for( unsigned int i = 0; i < (root->point.features.size()); i++)
             {
                 cout << root->point.features.at(i) << endl;
             }
