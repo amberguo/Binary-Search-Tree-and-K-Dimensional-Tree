@@ -41,7 +41,6 @@ protected:
     unsigned int iheight;
     
     //TODO: define a data structure to store current K nearest neighbors
-    vector<Point> kNeighbors;
     
 public:
     
@@ -91,13 +90,7 @@ public:
             }
         }
         // checking that preferred point
-        // d--
-        if (d == 0) {
-            d = numDim - 1;
-        }
-        else {
-            d--;
-        }
+
         findKNNHelper(pinpoint, queryPoint, d);
         return {};
     }
@@ -165,48 +158,13 @@ private:
         // 1. check preferred
         // 2. check alternative
         // 3. check curr (itself)
-        // inorder?
-        if (node == nullptr) {
-            return;
-        }
 
         // set the SquareDistToQuery
         node->point.setSquareDistToQuery(queryPoint);
         if (node->point.squareDistToQuery < threshold) {
             // update the treshold
             threshold = node->point.squareDistToQuery;
-            // push the preferred point into vector
-            kNeighbors.push_back(node->point);
-            updateKNN(node->point);
         }
-        // check the alternative
-        if (d == 0) {
-            d = numDim - 1;
-        }
-        else {
-            d--;
-        }
-        if (pow((node->parent->point.features[d]-queryPoint.features[d]),2) < threshold) {
-            // distance^2 smaller than threshold
-            // go to alternative
-            if (node->parent->left != nullptr && node->parent->left != node) {
-                // has left sibling, go to left
-                node = node->parent->left;
-            }
-            else if (node->parent->right != nullptr && node->parent->right != node) {
-                // has right sibling
-                node = node->parent->right;
-            }
-            else {
-                // either left or right is nullptr
-                // go to parent node
-                node = node->parent;
-            }
-        }
-
-        
-            
-        
         
 
     }
