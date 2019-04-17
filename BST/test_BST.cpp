@@ -23,7 +23,7 @@ int main() {
 	//v.push_back(100);
 	//v.push_back(-33);
     vector<int> v;
-    //v.push_back(66);
+    v.push_back(66);
     //v.push_back(77);
     //v.push_back(500);
     //v.push_back(1);
@@ -40,15 +40,15 @@ int main() {
 	vector<int>::iterator vit = v.begin();
 	vector<int>::iterator ven = v.end();
 
-	//for(; vit != ven; ++vit) {
-	//	// all these inserts are unique, so should return a std::pair
-	//	// with second part true
-	//	bool pr = b.insert(*vit);
-	//	if(! pr ) {
-	//		cout << "Incorrect bool return value when inserting " << *vit << endl;
-	//		return -1;
-	//	}
-	//}
+	for(; vit != ven; ++vit) {
+		// all these inserts are unique, so should return a std::pair
+		// with second part true
+		bool pr = b.insert(*vit);
+		if(! pr ) {
+			cout << "Incorrect bool return value when inserting " << *vit << endl;
+			return -1;
+		}
+	}
 
 
 	/* Test size. */
@@ -61,11 +61,11 @@ int main() {
 
 	/* Test height */
 
-	//cout << "Height is: " << b.height() << endl;
-	//if(b.height() != 3) {
-	//	cout << "... which is incorrect." << endl;
-	//	return -1;
-	//}
+	cout << "Height is: " << b.height() << endl;
+	if(b.height() != 0) {
+		cout << "... which is incorrect." << endl;
+		return -1;
+	}
 
 
 	/* Test find return value. */

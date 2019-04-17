@@ -24,11 +24,26 @@ public:
     
     /** TODO: Constructor that defines a data point with features and certain 
     label */
-    Point(vector<double> features, int label) {}
+    Point(vector<double> features, int label)
+    {
+        this->features = features;
+        this->label = label;
+    }
     
-    /** Set the square distance to current query point */
+    /** Set the square distance to current query point 
+     * formula: d^2 = (x1-x2)^2 + (y1-y2)^2 + ....
+     */
     void setSquareDistToQuery(const Point& queryPoint) {
         // TODO
+        vector<double> queryFeatures = queryPoint.features;
+        double dSquare = 0;
+        for(int i = 0; i< numDim; i++)
+        {
+            dSquare = dSquare + 
+                      pow((features.at(i) - queryFeatures.at(i)), 2);
+        }
+        squareDistToQuery = dSquare;
+
     }
     
     /** Equals operator */
