@@ -106,8 +106,8 @@ private:
         int median = (end + start) / 2;
         KDNode* newRoot = new KDNode(points.at(median));
         // recursively call, start is inclusive, end is exclusive
-        newRoot->left = buildSubtree(points, 0, median, d+1, height);
-        newRoot->right = buildSubtree(points, median+1, end, d+1, height);
+        newRoot->left = buildSubtree(points, 0, median, d+1, height+1);
+        newRoot->right = buildSubtree(points, median+1, end, d+1, height+1);
 
         return newRoot;
     }
