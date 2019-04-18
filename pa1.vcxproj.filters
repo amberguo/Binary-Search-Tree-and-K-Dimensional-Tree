@@ -13,41 +13,15 @@
       <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
       <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav</Extensions>
     </Filter>
+    <Filter Include="Source Files\test">
+      <UniqueIdentifier>{a008a339-1f34-486d-af9f-126fd2550c7a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Resource Files\test">
+      <UniqueIdentifier>{cb1b43a1-7a39-43ec-8f15-fc5865c99efb}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="bst\benchmark_BST.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="bst\test_BST.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="kdt\KNNClassifier.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="kdt\runtime.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="kdt\test_KDT.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-  </ItemGroup>
-  <ItemGroup>
-    <ClInclude Include="bst\BSA.hpp">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="bst\BST.hpp">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="bst\BSTIterator.hpp">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="bst\BSTNode.hpp">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="bst\Timer.hpp">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="kdt\BruteForceKNN.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="kdt\KDT.hpp">
@@ -56,11 +30,45 @@
     <ClInclude Include="kdt\Point.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="kdt\Timer.hpp">
-      <Filter>Header Files</Filter>
-    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <None Include=".editorconfig" />
+  </ItemGroup>
+  <ItemGroup>
+    <Text Include="KDT\test\custom_points.txt">
+      <Filter>Source Files\test</Filter>
+    </Text>
+    <Text Include="KDT\test\irisDescription.txt">
+      <Filter>Source Files\test</Filter>
+    </Text>
+    <Text Include="KDT\test\iris.txt">
+      <Filter>Source Files\test</Filter>
+    </Text>
+    <Text Include="KDT\test\queryPoints.txt">
+      <Filter>Source Files\test</Filter>
+    </Text>
+    <Text Include="KDT\test\solutionPoints.txt">
+      <Filter>Source Files\test</Filter>
+    </Text>
+    <Text Include="KDT\test\test_points.txt">
+      <Filter>Source Files\test</Filter>
+    </Text>
+    <Text Include="KDT\test\validation.txt">
+      <Filter>Source Files\test</Filter>
+    </Text>
+    <Text Include="KDT\test\training.txt">
+      <Filter>Source Files\test</Filter>
+    </Text>
+    <Text Include="KDT\test\wine.txt">
+      <Filter>Source Files\test</Filter>
+    </Text>
+    <Text Include="KDT\test\wineDescription.txt">
+      <Filter>Source Files\test</Filter>
+    </Text>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="KDT\test_KDT.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
 </Project>

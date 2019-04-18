@@ -27,22 +27,22 @@
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
     <ConfigurationType>Application</ConfigurationType>
     <UseDebugLibraries>true</UseDebugLibraries>
-    <PlatformToolset>v141</PlatformToolset>
+    <PlatformToolset>v142</PlatformToolset>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
     <ConfigurationType>Application</ConfigurationType>
     <UseDebugLibraries>false</UseDebugLibraries>
-    <PlatformToolset>v141</PlatformToolset>
+    <PlatformToolset>v142</PlatformToolset>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
     <ConfigurationType>Application</ConfigurationType>
     <UseDebugLibraries>true</UseDebugLibraries>
-    <PlatformToolset>v141</PlatformToolset>
+    <PlatformToolset>v142</PlatformToolset>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
     <ConfigurationType>Application</ConfigurationType>
     <UseDebugLibraries>false</UseDebugLibraries>
-    <PlatformToolset>v141</PlatformToolset>
+    <PlatformToolset>v142</PlatformToolset>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
   <ImportGroup Label="ExtensionSettings">
@@ -98,25 +98,27 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="bst\benchmark_BST.cpp" />
-    <ClCompile Include="bst\test_BST.cpp" />
-    <ClCompile Include="kdt\KNNClassifier.cpp" />
-    <ClCompile Include="kdt\runtime.cpp" />
-    <ClCompile Include="kdt\test_KDT.cpp" />
-  </ItemGroup>
-  <ItemGroup>
-    <ClInclude Include="bst\BSA.hpp" />
-    <ClInclude Include="bst\BST.hpp" />
-    <ClInclude Include="bst\BSTIterator.hpp" />
-    <ClInclude Include="bst\BSTNode.hpp" />
     <ClInclude Include="bst\Timer.hpp" />
-    <ClInclude Include="kdt\BruteForceKNN.hpp" />
     <ClInclude Include="kdt\KDT.hpp" />
     <ClInclude Include="kdt\Point.hpp" />
-    <ClInclude Include="kdt\Timer.hpp" />
   </ItemGroup>
   <ItemGroup>
     <None Include=".editorconfig" />
+  </ItemGroup>
+  <ItemGroup>
+    <Text Include="KDT\test\custom_points.txt" />
+    <Text Include="KDT\test\iris.txt" />
+    <Text Include="KDT\test\irisDescription.txt" />
+    <Text Include="KDT\test\queryPoints.txt" />
+    <Text Include="KDT\test\solutionPoints.txt" />
+    <Text Include="KDT\test\test_points.txt" />
+    <Text Include="KDT\test\training.txt" />
+    <Text Include="KDT\test\validation.txt" />
+    <Text Include="KDT\test\wine.txt" />
+    <Text Include="KDT\test\wineDescription.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="KDT\test_KDT.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
