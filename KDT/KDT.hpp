@@ -6,6 +6,7 @@
 #include <vector>    // vector<typename>
 #include <iostream>
 #include "Point.hpp"
+#include <queue>
 
 
 using namespace std;
@@ -40,7 +41,8 @@ protected:
     unsigned int isize;
     unsigned int iheight;
 
-    //TODO: define a data structure to store current K nearest neighbors
+    // using priority queue
+    priority_queue<Point> KNeighbors;
 
 public:
 
@@ -114,14 +116,73 @@ private:
 
     /** Helper method to recursively find the K nearest neighbors */
     void findKNNHelper(KDNode * node, const Point & queryPoint, unsigned int d) {
-        // TODO
+        // null check
+        if (node == nullptr) {
+            // no neighbor!! 
+            // sad lonely guy
+            return;
+        }
+        // leftnode situation
+        if (node->left == nullptr && node->right == nullptr) {
+            // checking square distance
+            node->point.setSquareDistToQuery(queryPoint);
+            if (node->point.squareDistToQuery < threshold) {
+                threshold = node->point.squareDistToQuery;
+                updateKNN();
+            }
+        }
+        // check to go right or left
+        if (node->point.features[d] < queryPoint.features[d]) {
+            // dimensional distance of node < that of query, go left
+            if (root->left) {
+                // recursively go left
+                d = incrementD(d);
+                findKNNHelper(node->left, queryPoint, d);
+
+                // check square distance
+                node->point.setSquareDistToQuery(queryPoint);
+                if (node->point.squareDistToQuery < threshold) {
+                    threshold = node->point.squareDistToQuery;
+                    updateKNN();
+                    d = incrementD(d);
+                    findKNNHelper(node->right, queryPoint, d);
+                }
+            }
+        }
+        // go right
+        else {
+            if (root->right) {
+                // recursively go right
+                d = incrementD(d);
+                findKNNHelper(node->right, queryPoint, d);
+
+                // check square distance
+                node->point.setSquareDistToQuery(queryPoint);
+                if (node->point.squareDistToQuery < threshold) {
+                    threshold = node->point.squareDistToQuery;
+                    updateKNN();
+                    d = incrementD(d);
+                    findKNNHelper(node->left, queryPoint, d);
+                }
+
+
+            }
+
+        }
+    }
+
+    unsigned int incrementD(unsigned int d) {
+        if (d == numDim - 1) {
+            return 0;
+        }
+        return d+1;
     }
 
     /** Helper method to update your data structure storing KNN using
      *  the given point.
      */
     void updateKNN(Point & point) {
-        // TODO
+        KNeighbors.push(point);
     }
 
     /** Helper method
