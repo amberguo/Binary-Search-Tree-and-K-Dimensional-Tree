@@ -29,6 +29,7 @@ public:
         this->features = features;
         this->label = label;
         this->numDim = features.size();
+        this->squareDistToQuery = 0;
 
     }
     

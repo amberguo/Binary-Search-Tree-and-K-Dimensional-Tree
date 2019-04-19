@@ -40,6 +40,7 @@ protected:
     double threshold; // largest distance to query point in current KNN
     unsigned int isize;
     unsigned int iheight;
+    int count = 0;
 
     // using priority queue
     struct distanceComp
@@ -101,6 +102,7 @@ public:
 
     /** Find k nearest neighbors of the given query point */
     vector<Point> findKNearestNeighbors(Point queryPoint, unsigned int k) {
+        this->k = k;
         threshold = std::numeric_limits<double>::infinity();
         findKNNHelper(root, queryPoint, 0);
         if(KNeighbors.size() > k)
@@ -131,7 +133,6 @@ public:
     }
 
 private:
-
     /** Helper method to recursively build the subtree of KD tree. */
     KDNode* buildSubtree(vector<Point>& points, unsigned int start,
         unsigned int end, unsigned int d, unsigned int height) {
@@ -161,7 +162,6 @@ private:
         int median = (end + start) / 2;
 
         KDNode* newRoot = new KDNode(points.at(median));
-        cout << "median is " << median << endl;
         isize++;
         // recursively call, start is inclusive, end is exclusive
         newRoot->left = buildSubtree(points, start, median, d + 1, height + 1);
@@ -177,9 +177,11 @@ private:
 
         return newRoot;
     }
-
+    
     /** Helper method to recursively find the K nearest neighbors */
     void findKNNHelper(KDNode * node, const Point & queryPoint, unsigned int d) {
+        if (node != nullptr)
+            cout << node->point.features[0] << node->point.features[1] << endl;
         // null check
         if (node == nullptr) {
             // no neighbor!! 
@@ -196,7 +198,7 @@ private:
                 threshold = node->point.squareDistToQuery;
                 updateKNN(node->point);
             }
-        }
+        } 
         // check to go right or left
         if (queryPoint.features[d] < node->point.features[d] ) {
             // dimensional distance of node < that of query, go left
@@ -273,6 +275,12 @@ private:
      *  the given point.
      */
     void updateKNN(Point & point) {
+        
+        //if((KNeighbors.size() > this->k) && (count ==0))
+        //{
+        //    threshold = std::numeric_limits<double>::infinity();
+
+        //}
         KNeighbors.push(point);
     }
 
