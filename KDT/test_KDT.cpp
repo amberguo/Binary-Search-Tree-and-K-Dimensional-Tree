@@ -84,6 +84,11 @@ int run_tests(vector<Point>& kdt_build_points,
   vector<Point>::iterator solution_it = solutions.begin();
   for (; test_it != test_cases.end() && solution_it != solutions.end();
        test_it++, solution_it++) {
+    // my add
+    if((*test_it).features[0] == 100)
+    {
+        cout << "haha" << endl;
+    }
     auto result = tree->findKNearestNeighbors(*test_it, 1);
       
     if (result.size() == 0 || result[0] != *solution_it) {
