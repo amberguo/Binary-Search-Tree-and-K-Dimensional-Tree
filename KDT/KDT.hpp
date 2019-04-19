@@ -40,7 +40,6 @@ protected:
     double threshold; // largest distance to query point in current KNN
     unsigned int isize;
     unsigned int iheight;
-    int count = 0;
 
     // using priority queue
     struct distanceComp
@@ -51,11 +50,9 @@ protected:
         }
     };
     std::priority_queue<Point, std::vector<Point>, distanceComp > KNeighbors;
-    //priority_queue<Point> KNeighbors;
 
 public:
 
-    /** TODO: Default constructor of KD tree */
     KDT()
     {
         root = nullptr;
@@ -65,6 +62,7 @@ public:
         k = 0;
         numDim = 0;
     }
+    // destructor of KDT
     ~KDT()
     {
         root = nullptr;
@@ -106,6 +104,7 @@ public:
         this->k = k;
         threshold = std::numeric_limits<double>::infinity();
         findKNNHelper(root, queryPoint, 0);
+        // check for the KNeighbors again
         if (KNeighbors.size() > k)
         {
             unsigned int count = KNeighbors.size() - k;
@@ -159,18 +158,21 @@ private:
         }
         CompareValueAt comparator = CompareValueAt(d);
         // initial sorting for all the points
-        sort(points.begin() + start, points.begin() + end, comparator);
+        sort(points.begin() + start, points.begin() + end, 
+            comparator);
         int median = (end + start) / 2;
 
         KDNode* newRoot = new KDNode(points.at(median));
         isize++;
         // recursively call, start is inclusive, end is exclusive
-        newRoot->left = buildSubtree(points, start, median, d + 1, height + 1);
+        newRoot->left = buildSubtree(points, start, median, d + 1, 
+                               height + 1);
         if (newRoot->left != nullptr) {
             newRoot->left->parent = newRoot;
         }
 
-        newRoot->right = buildSubtree(points, median + 1, end, d + 1, height + 1);
+        newRoot->right = buildSubtree(points, median + 1, end, d + 1, 
+                                     height + 1);
 
         if (newRoot->right != nullptr) {
             newRoot->right->parent = newRoot;
@@ -180,17 +182,7 @@ private:
     }
 
     /** Helper method to recursively find the K nearest neighbors */
-    void findKNNHelper(KDNode * node, const Point & queryPoint, unsigned int d) {
-        //if (node != nullptr)
-        //    cout << node->point.features[0] << node->point.features[1] << endl;
-        // null check
-
-        //if(node != nullptr && node->point.features[0] > -99.975 && node->point.features[0] < -99.974
-        //    && node->point.features[1] > -8.9 && node->point.features[1]< -8.7)
-        //{
-        //    cout << "stop plz" << endl;
-        //}
-
+    void findKNNHelper(KDNode * node, const Point & queryPoint, unsigned int d){
         if (node == nullptr) {
             // no neighbor!! 
             // sad lonely guy
@@ -219,19 +211,11 @@ private:
 
             }
 
-            // here is coming back from left or left does not exist
-            // distance square between dimension d with this node and threshold?
-
-            if(node->right && pow((node->point.features[d] - queryPoint.features[d]), 2) < threshold)
+            if(node->right && pow((node->point.features[d] - 
+                queryPoint.features[d]), 2) < threshold)
             {
                 findKNNHelper(node->right, queryPoint, incrementD(d));
-    
             }
-            //if (node->right)
-            //{
-            //    findKNNHelper(node->right, queryPoint, incrementD(d));
-
-            //}
 
         }   else {
             // go right
@@ -240,17 +224,11 @@ private:
                 findKNNHelper(node->right, queryPoint, incrementD(d));
             }
 
-
-            if (node->left && pow((node->point.features[d] - queryPoint.features[d]), 2) < threshold)
+            if (node->left && pow((node->point.features[d] - 
+                queryPoint.features[d]), 2) < threshold)
             {
                 findKNNHelper(node->left, queryPoint, incrementD(d));
             }
-
-            //if (node->left)
-            //{
-            //    findKNNHelper(node->left, queryPoint, incrementD(d));
-            //}
-
         }
 
         node->point.setSquareDistToQuery(queryPoint);
@@ -283,26 +261,16 @@ private:
      */
     void updateKNN(Point & point) {
 
-        //if((KNeighbors.size() > this->k) && (count ==0))
-        //{
-        //    threshold = std::numeric_limits<double>::infinity();
-
-        //}
-        //在这里就要pop掉了 只留k个
-
         KNeighbors.push(point);
         if (KNeighbors.size() == k + 1)
         {
             Point tmp = KNeighbors.top();
-            //print tmp useful debug information; 看是不是pq写的不对，写反了，比如最小的15个 应该用max heap，pop出来是最大的，这个得想清楚 然后这个pq永远保持最小的
-    
-
             KNeighbors.pop();
         }
     }
 
     /** Helper method
-     * Inorder traverse BST, print out the data of each node in ascending order.
+     * Inorder traverse BST, print out the data of each node in ascending order
      * Implementing inorder and deleteAll base on the pseudo code is an easy
      * way to get started.
      * Pseudo Code:
