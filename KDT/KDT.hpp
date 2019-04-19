@@ -47,7 +47,7 @@ protected:
     {
         bool operator()(const Point& lhs, const Point& rhs) const
         {
-            return lhs.squareDistToQuery < lhs.squareDistToQuery;
+            return lhs.squareDistToQuery < rhs.squareDistToQuery;
         }
     };
     std::priority_queue<Point, std::vector<Point>, distanceComp > KNeighbors;
@@ -79,7 +79,7 @@ public:
 
     /** Build the KD tree from the given vector of Point references */
     void build(vector<Point>& points) {
-        if(points.empty())
+        if (points.empty())
         {
             numDim = 0;
             root = nullptr;
@@ -90,7 +90,8 @@ public:
             numDim = 0;
             return;
 
-        } else
+        }
+        else
         {
             numDim = points.at(0).numDim;
         }
@@ -105,11 +106,11 @@ public:
         this->k = k;
         threshold = std::numeric_limits<double>::infinity();
         findKNNHelper(root, queryPoint, 0);
-        if(KNeighbors.size() > k)
+        if (KNeighbors.size() > k)
         {
             unsigned int count = KNeighbors.size() - k;
             // to many points in it, delete some nodes with large distance
-            for( unsigned int i = 0; i< count; i++)
+            for (unsigned int i = 0; i < count; i++)
             {
                 KNeighbors.pop();
             }
@@ -177,12 +178,19 @@ private:
 
         return newRoot;
     }
-    
+
     /** Helper method to recursively find the K nearest neighbors */
     void findKNNHelper(KDNode * node, const Point & queryPoint, unsigned int d) {
-        if (node != nullptr)
-            cout << node->point.features[0] << node->point.features[1] << endl;
+        //if (node != nullptr)
+        //    cout << node->point.features[0] << node->point.features[1] << endl;
         // null check
+
+        //if(node != nullptr && node->point.features[0] > -99.975 && node->point.features[0] < -99.974
+        //    && node->point.features[1] > -8.9 && node->point.features[1]< -8.7)
+        //{
+        //    cout << "stop plz" << endl;
+        //}
+
         if (node == nullptr) {
             // no neighbor!! 
             // sad lonely guy
@@ -198,66 +206,65 @@ private:
                 threshold = node->point.squareDistToQuery;
                 updateKNN(node->point);
             }
-        } 
+            return;
+        }
         // check to go right or left
-        if (queryPoint.features[d] < node->point.features[d] ) {
+        // dimension d at querypoint is less than this point dimension d
+        if (queryPoint.features[d] < node->point.features[d]) {
+            
             // dimensional distance of node < that of query, go left
             if (node->left) {
                 // recursively go left
-                d = incrementD(d);
-                findKNNHelper(node->left, queryPoint, d);
-                d = decrementD(d);
+                findKNNHelper(node->left, queryPoint, incrementD(d));
 
-                if (pow((node->point.features[d] - queryPoint.features[d]), 2) < threshold)
-                {
-                    d = incrementD(d);
-                    findKNNHelper(node->right, queryPoint, d);
-                    d = decrementD(d);
-                }
-
-                // check square distance
-                node->point.setSquareDistToQuery(queryPoint);
-                if (node->point.squareDistToQuery < threshold) {
-                    // square distance is less than threshold
-                    // update threshold + update this node into queue
-                    threshold = node->point.squareDistToQuery;
-                    updateKNN(node->point);
-                }
             }
-        }
-        // go right
-        else {
+
+            // here is coming back from left or left does not exist
+            // distance square between dimension d with this node and threshold?
+
+            if(node->right && pow((node->point.features[d] - queryPoint.features[d]), 2) < threshold)
+            {
+                findKNNHelper(node->right, queryPoint, incrementD(d));
+    
+            }
+            //if (node->right)
+            //{
+            //    findKNNHelper(node->right, queryPoint, incrementD(d));
+
+            //}
+
+        }   else {
+            // go right
             if (node->right) {
                 // recursively go right
-                d = incrementD(d);
-                findKNNHelper(node->right, queryPoint, d);
-                d = decrementD(d);
-
-                if (pow((node->point.features[d] - queryPoint.features[d]), 2) < threshold)
-                {
-                    d = incrementD(d);
-                    findKNNHelper(node->left, queryPoint, d);
-                    d = decrementD(d);
-                }
-                // check square distance
-                node->point.setSquareDistToQuery(queryPoint);
-                if (node->point.squareDistToQuery < threshold) {
-                    // square distance is less than threshold
-                    // update threshold + update this node into queue
-                    threshold = node->point.squareDistToQuery;
-                    updateKNN(node->point);
-                }
+                findKNNHelper(node->right, queryPoint, incrementD(d));
             }
 
+
+            if (node->left && pow((node->point.features[d] - queryPoint.features[d]), 2) < threshold)
+            {
+                findKNNHelper(node->left, queryPoint, incrementD(d));
+            }
+
+            //if (node->left)
+            //{
+            //    findKNNHelper(node->left, queryPoint, incrementD(d));
+            //}
+
+        }
+
+        node->point.setSquareDistToQuery(queryPoint);
+        if (node->point.squareDistToQuery < threshold) {
+            // square distance is less than threshold
+            // update threshold + update this node into queue
+            threshold = node->point.squareDistToQuery;
+            updateKNN(node->point);
         }
 
     }
 
     unsigned int incrementD(unsigned int d) {
-        if (d == numDim - 1) {
-            return 0;
-        }
-        return d+1;
+        return (d + 1) % numDim;
     }
 
     unsigned int decrementD(unsigned int d) {
@@ -267,7 +274,7 @@ private:
         }
         else
         {
-            return d-1;
+            return d - 1;
         }
     }
 
@@ -275,13 +282,23 @@ private:
      *  the given point.
      */
     void updateKNN(Point & point) {
-        
+
         //if((KNeighbors.size() > this->k) && (count ==0))
         //{
         //    threshold = std::numeric_limits<double>::infinity();
 
         //}
+        //在这里就要pop掉了 只留k个
+
         KNeighbors.push(point);
+        if (KNeighbors.size() == k + 1)
+        {
+            Point tmp = KNeighbors.top();
+            //print tmp useful debug information; 看是不是pq写的不对，写反了，比如最小的15个 应该用max heap，pop出来是最大的，这个得想清楚 然后这个pq永远保持最小的
+    
+
+            KNeighbors.pop();
+        }
     }
 
     /** Helper method

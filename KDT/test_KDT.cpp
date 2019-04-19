@@ -194,6 +194,8 @@ int main(int argc, char* argv[])
   }
 
   int error_count = custom_tests() + empty_test() + exhaustive_tests();
+  
+    
 
   if (error_count == 0) {
     cout << "Tests passed" << endl;
