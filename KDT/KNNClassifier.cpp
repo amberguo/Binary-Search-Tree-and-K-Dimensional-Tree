@@ -85,7 +85,7 @@ int mostFreqLabel(vector<Point>& points) {
     //    }
     //}
     //return mostFrequentLabel;
-    if (points.at(0) < points.at(1))
+    if (points.at(0).label < points.at(1).label)
     {
         return points.at(0).label;
     }
