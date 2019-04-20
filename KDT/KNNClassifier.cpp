@@ -180,11 +180,20 @@ int main(int argc, const char * argv[]) {
 
         double mismatch = 0;
         vector<Point> input = readData(argv[3], true);
-        for (unsigned int i = 0; i< input.size(); i++)
+        //for (unsigned int i = 0; i< input.size(); i++)
+        //{
+        //    vector<Point> neighbors = tree.findKNearestNeighbors(input.at(i), k);
+        //    int prediction = mostFreqLabel(neighbors);
+        //    if( prediction != input.at(i).label)
+        //    {
+        //        mismatch++;
+        //    }
+        //}
+        for (unsigned int i = 0; i < training.size(); i++)
         {
-            vector<Point> neighbors = tree.findKNearestNeighbors(input.at(i), k);
+            vector<Point> neighbors = tree.findKNearestNeighbors(training.at(i), k);
             int prediction = mostFreqLabel(neighbors);
-            if( prediction != input.at(i).label)
+            if (prediction != training.at(i).label)
             {
                 mismatch++;
             }
