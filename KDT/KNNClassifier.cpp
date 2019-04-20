@@ -120,24 +120,6 @@ bool fileValid(const char * fileName) {
 }
 
 int main(int argc, const char * argv[]) {
-    //vector<double> haha;
-    //haha.push_back(0);
-
-    //Point a = Point(haha, 5);
-    //Point b = Point(haha, 5);
-    //Point c = Point(haha, 1);
-    //Point d = Point(haha, 1);
-    //Point e = Point(haha, 10);
-    //Point f = Point(haha, 9);
-    //vector<Point> test;
-    //test.push_back(a);
-    //test.push_back(b);
-    //test.push_back(c);
-    //test.push_back(d);
-    //test.push_back(e);
-    //test.push_back(f);
-    //cout << mostFreqLabel(test) << endl;
-
     // check if second arg is an integer
     char *endptr;
     int k = strtol(argv[1], &endptr, 10);
@@ -172,14 +154,17 @@ int main(int argc, const char * argv[]) {
     {
         // validation mode
         // training the classifier using training data
-        vector<Point> training = readData(argv[2], true); 
-        int prediction = mostFreqLabel(training);
+        vector<Point> training = readData(argv[2], true);
+        KDT tree = KDT();
+        tree.build(training);
 
         int mismatch = 0;
         vector<Point> input = readData(argv[3], true);
         for (unsigned int i = 0; i< input.size(); i++)
         {
-            if(input.at(i).label != prediction)
+            vector<Point> neighbors = tree.findKNearestNeighbors(input.at(i), k);
+            int prediction = mostFreqLabel(neighbors);
+            for( prediction != input.at(i).label)
             {
                 mismatch++;
             }
