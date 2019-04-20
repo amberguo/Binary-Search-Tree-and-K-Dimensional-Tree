@@ -94,8 +94,8 @@ int run_tests(vector<Point>& kdt_build_points,
     a.push_back(1);
     a.push_back(4);
     Point p = Point(a, 0);
-    auto result = tree->findKNearestNeighbors(p, 3);
-    //auto result = tree->findKNearestNeighbors(*test_it, 1);
+    //auto result = tree->findKNearestNeighbors(p, 3);
+    auto result = tree->findKNearestNeighbors(*test_it, 1);
     if (result.size() == 0 || result[0] != *solution_it) {
       cerr << "Test failed for find of point " << *test_it << endl;
       cerr << "\tExpected: " << *solution_it << endl;
