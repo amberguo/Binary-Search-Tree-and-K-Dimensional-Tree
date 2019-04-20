@@ -180,24 +180,24 @@ int main(int argc, const char * argv[]) {
 
         double mismatch = 0;
         vector<Point> input = readData(argv[3], true);
-        //for (unsigned int i = 0; i< input.size(); i++)
-        //{
-        //    vector<Point> neighbors = tree.findKNearestNeighbors(input.at(i), k);
-        //    int prediction = mostFreqLabel(neighbors);
-        //    if( prediction != input.at(i).label)
-        //    {
-        //        mismatch++;
-        //    }
-        //}
-        for (unsigned int i = 0; i < training.size(); i++)
+        for (unsigned int i = 0; i< input.size(); i++)
         {
-            vector<Point> neighbors = tree.findKNearestNeighbors(training.at(i), k);
+            vector<Point> neighbors = tree.findKNearestNeighbors(input.at(i), k);
             int prediction = mostFreqLabel(neighbors);
-            if (prediction != training.at(i).label)
+            if( prediction != input.at(i).label)
             {
                 mismatch++;
             }
         }
+        //for (unsigned int i = 0; i < training.size(); i++)
+        //{
+        //    vector<Point> neighbors = tree.findKNearestNeighbors(training.at(i), k);
+        //    int prediction = mostFreqLabel(neighbors);
+        //    if (prediction != training.at(i).label)
+        //    {
+        //        mismatch++;
+        //    }
+        //}
         // TODO double or float
         cout << "mismatch is " << mismatch << endl;
         double error = mismatch / input.size();
@@ -212,7 +212,7 @@ int main(int argc, const char * argv[]) {
         // test
         // Each line of the input data file should contain only the features of 
         // this data, no label following.
-        vector<Point> input = readData(argv[3], true);
+        vector<Point> input = readData(argv[3], false);
         vector<Point> neighbors;
         KDT tree = KDT();
         tree.build(input);
