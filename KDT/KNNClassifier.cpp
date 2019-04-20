@@ -164,7 +164,7 @@ int main(int argc, const char * argv[]) {
         {
             vector<Point> neighbors = tree.findKNearestNeighbors(input.at(i), k);
             int prediction = mostFreqLabel(neighbors);
-            for( prediction != input.at(i).label)
+            if( prediction != input.at(i).label)
             {
                 mismatch++;
             }
