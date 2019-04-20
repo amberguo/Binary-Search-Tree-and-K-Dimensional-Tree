@@ -158,7 +158,7 @@ int main(int argc, const char * argv[]) {
         KDT tree = KDT();
         tree.build(training);
 
-        int mismatch = 0;
+        double mismatch = 0;
         vector<Point> input = readData(argv[3], true);
         for (unsigned int i = 0; i< input.size(); i++)
         {
