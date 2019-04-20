@@ -170,6 +170,7 @@ int main(int argc, const char * argv[]) {
             }
         }
         // TODO double or float
+        cout << "mismatch is " << mismatch << endl;
         double error = mismatch / input.size();
 
         std::ofstream file;
