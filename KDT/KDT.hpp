@@ -109,7 +109,7 @@ public:
     vector<Point> findKNearestNeighbors(Point queryPoint, unsigned int k) {
         this->k = k;
         threshold = std::numeric_limits<double>::infinity();
-        findKNNHelper(root, queryPoint, 0);
+        findKNNHelperAll(root, queryPoint, 0);
 
         //if (KNeighbors.size() == k + 1)
         //{
@@ -237,6 +237,33 @@ private:
 
         return newRoot;
     }
+
+
+    void findKNNHelperAll(KDNode * node, const Point & queryPoint, unsigned int d) {
+        // leaf node situation
+        if (node->left == nullptr && node->right == nullptr) {
+            // checking square distance
+
+            node->point.setSquareDistToQuery(queryPoint);
+            updateKNN(node->point);
+            return;
+        }
+
+        if (node->left) {
+            // recursively go left
+            findKNNHelper(node->left, queryPoint, incrementD(d));
+        }
+
+        if (node->right) {
+            // recursively go right
+            findKNNHelper(node->right, queryPoint, incrementD(d));
+        }
+
+        node->point.setSquareDistToQuery(queryPoint);
+        updateKNN(node->point);
+     
+    }
+
 
     void findKNNHelper(KDNode * node, const Point & queryPoint, unsigned int d) {
         if (node == nullptr) {
