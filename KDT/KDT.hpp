@@ -325,13 +325,27 @@ private:
     /** Helper method to update your data structure storing KNN using
      *  the given point.
      */
-    void updateKNN(Point & point) {
-        KNeighbors.push(point);
-        if (KNeighbors.size() == k + 1)
+    void updateKNN(Point & point){
+        if (KNeighbors.size() < this->k )
         {
-            Point tmp = KNeighbors.top();
-            KNeighbors.pop();
+            KNeighbors.push(point);
         }
+        else
+        {
+            if (KNeighbors.top().squareDistToQuery > point.squareDistToQuery)
+            {
+                KNeighbors.pop();
+                KNeighbors.push(point);
+            }
+        }
+
+
+        //KNeighbors.push(point);
+        //if (KNeighbors.size() == k + 1)
+        //{
+        //    Point tmp = KNeighbors.top();
+        //    KNeighbors.pop();
+        //}
     }
 
     /** Helper method
