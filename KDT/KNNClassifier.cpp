@@ -186,12 +186,14 @@ int main(int argc, const char * argv[]) {
             int prediction = mostFreqLabel(neighbors);
             if( prediction != input.at(i).label)
             {
-                cout << "i is " << i << endl;
+                cout << "i is " << i;
+                cout << "first neighbor " << neighbors.at(0).squareDistToQuery << "second neighbor" << neighbors.at(1).squareDistToQuery;
                 cout << "square dist " << input.at(i).squareDistToQuery << endl;
                 mismatch++;
             } else
             {
-                cout << "the correct i is " << i << endl;
+                cout << "the correct i is " << i;
+                cout << "the correct first neighbor " << neighbors.at(0).squareDistToQuery << "the correct second neighbor" << neighbors.at(1).squareDistToQuery;
                 cout << "the correct square dist " << input.at(i).squareDistToQuery << endl;
             }
         }
