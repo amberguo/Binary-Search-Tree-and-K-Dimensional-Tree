@@ -332,7 +332,7 @@ private:
         }
         else
         {
-            if (KNeighbors.top().squareDistToQuery > point.squareDistToQuery)
+            if (KNeighbors.top().squareDistToQuery >= point.squareDistToQuery)
             {
                 KNeighbors.pop();
                 KNeighbors.push(point);
