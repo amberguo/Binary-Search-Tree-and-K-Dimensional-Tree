@@ -99,8 +99,8 @@ public:
         //    haha.push_back(points.at(i));
         //}
         // build the tree by building left/right subtrees using recursion
-        //root = buildSubtree(points, 0, points.size(), 0, 0);
-        root = buildSubtree(points, 0, points.size()-1, 0, 0);
+        root = buildSubtree(points, 0, points.size(), 0, 0);
+        //root = buildSubtree2(points, 0, points.size()-1, 0, 0);
         // decrement the height to exclude the null node at the end of paths
         //iheight--;
         //inorderRec(root);
@@ -280,28 +280,12 @@ private:
             // sad lonely guy
             return;
         }
-        if(KNeighbors.size() == k)
+
+        if (node->left == nullptr && node->right == nullptr)
         {
-            threshold = KNeighbors.top().squareDistToQuery;
-        }
-        // leaf node situation
-        if (node->left == nullptr && node->right == nullptr) {
             // checking square distance
-            if(KNeighbors.size() < k)
-            {
-                node->point.setSquareDistToQuery(queryPoint);
-                updateKNN(node->point);
-            } else
-            {
-                node->point.setSquareDistToQuery(queryPoint);
-                if (node->point.squareDistToQuery < threshold) {
-                    // square distance is less than threshold
-                    // update threshold + update this node into queue
-                    threshold = node->point.squareDistToQuery;
-                    updateKNN(node->point);
-                } 
-            }
-            
+            node->point.setSquareDistToQuery(queryPoint);
+            updateKNN(node->point);
             return;
         }
         // check to go right or left
@@ -312,9 +296,12 @@ private:
             if (node->left) {
                 // recursively go left
                 findKNNHelper(node->left, queryPoint, incrementD(d));
-
             }
 
+            if (KNeighbors.size() == k)
+            {
+                threshold = KNeighbors.top().squareDistToQuery;
+            }
             if (node->right && pow((node->point.features[d] -
                 queryPoint.features[d]), 2) < threshold)
             {
@@ -329,29 +316,19 @@ private:
                 findKNNHelper(node->right, queryPoint, incrementD(d));
             }
 
+            if (KNeighbors.size() == k)
+            {
+                threshold = KNeighbors.top().squareDistToQuery;
+            }
+
             if (node->left && pow((node->point.features[d] -
                 queryPoint.features[d]), 2) < threshold)
             {
                 findKNNHelper(node->left, queryPoint, incrementD(d));
             }
         }
-
-        if (KNeighbors.size() < k)
-        {
-            node->point.setSquareDistToQuery(queryPoint);
-            updateKNN(node->point);
-        }
-        else
-        {
-            node->point.setSquareDistToQuery(queryPoint);
-            if (node->point.squareDistToQuery < threshold) {
-                // square distance is less than threshold
-                // update threshold + update this node into queue
-                threshold = node->point.squareDistToQuery;
-                updateKNN(node->point);
-            }
-        }
-
+        node->point.setSquareDistToQuery(queryPoint);
+        updateKNN(node->point);
     }
 
     unsigned int incrementD(unsigned int d) {
