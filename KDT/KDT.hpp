@@ -157,6 +157,12 @@ private:
             // update max height
             iheight = height;
         }
+        if (start == end)
+        {
+            KDNode* newRoot = new KDNode(points.at(start));
+            isize++;
+            return newRoot;
+        }
         if (d >= numDim)
         {
             // toggle the dimension
