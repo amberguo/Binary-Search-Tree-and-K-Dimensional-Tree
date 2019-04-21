@@ -123,23 +123,6 @@ bool fileValid(const char * fileName) {
 }
 
 int main(int argc, const char * argv[]) {
-    vector<double> haha;
-    haha.push_back(0);
-
-    Point a = Point(haha, 5);
-    Point b = Point(haha, 5);
-    Point c = Point(haha, 4);
-    Point d = Point(haha, 4);
-    Point e = Point(haha, 0);
-    Point f = Point(haha, 0);
-    vector<Point> test;
-    test.push_back(a);
-    test.push_back(b);
-    test.push_back(c);
-    test.push_back(d);
-    test.push_back(e);
-    test.push_back(f);
-    cout << mostFreqLabel(test) << endl;
     // check if second arg is an integer
     char *endptr;
     int k = strtol(argv[1], &endptr, 10);
@@ -186,13 +169,13 @@ int main(int argc, const char * argv[]) {
             int prediction = mostFreqLabel(neighbors);
             if( prediction != input.at(i).label)
             {
-                cout << "i is " << i;
-                cout << " first neighbor " << neighbors.at(0).squareDistToQuery << " second neighbor" << neighbors.at(1).squareDistToQuery << endl;
+                /*cout << "i is " << i;
+                cout << " first neighbor " << neighbors.at(0).squareDistToQuery << " second neighbor" << neighbors.at(1).squareDistToQuery << endl;*/
                 mismatch++;
             } else
             {
-                cout << "the correct i is " << i;
-                cout << " the correct first neighbor " << neighbors.at(0).squareDistToQuery << " the correct second neighbor" << neighbors.at(1).squareDistToQuery << endl;
+                /*cout << "the correct i is " << i;
+                cout << " the correct first neighbor " << neighbors.at(0).squareDistToQuery << " the correct second neighbor" << neighbors.at(1).squareDistToQuery << endl;*/
             }
         }
         //for (unsigned int i = 0; i < training.size(); i++)

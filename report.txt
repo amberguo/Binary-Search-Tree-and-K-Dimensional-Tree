@@ -76,3 +76,8 @@ For this set of data, I used the non-random data instead (0,1,2,3,...), to
 insert and find in the BSA and BST.
 As we can see, the efficiency of BST now is outperformed by BSA, due to the fact
 that the BST is no longer balanced.
+
+
+4. How does the validation error change when K goes from 5 to 30? (5, 10, 15 
+... 30) Make sure you include the specific output messages in your answer.
+
