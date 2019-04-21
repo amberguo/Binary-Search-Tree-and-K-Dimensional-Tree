@@ -110,7 +110,7 @@ public:
     vector<Point> findKNearestNeighbors(Point queryPoint, unsigned int k) {
         this->k = k;
         threshold = std::numeric_limits<double>::infinity();
-        findKNNHelperAll(root, queryPoint, 0);
+        findKNNHelper(root, queryPoint, 0);
 
         //if (KNeighbors.size() == k + 1)
         //{
@@ -146,56 +146,56 @@ public:
 
 private:
 
-    KDNode* buildSubtree2(vector<Point>& points, int start, int end, 
-                        unsigned int d, unsigned int height) {
-        if (start > end)
-        {
-            return nullptr;
-        }
-        if (height > iheight)
-        {
-            // update max height
-            iheight = height;
-        }
-        if (start == end)
-        {
-            KDNode* newRoot = new KDNode(points.at(start));
-            newRoot->left = nullptr;
-            newRoot->right = nullptr;
-            isize++;
-            return newRoot;
-        }
-        if (d >= numDim)
-        {
-            // toggle the dimension
-            d = 0;
-        }
+    //KDNode* buildSubtree2(vector<Point>& points, int start, int end, 
+    //                    unsigned int d, unsigned int height) {
+    //    if (start > end)
+    //    {
+    //        return nullptr;
+    //    }
+    //    if (height > iheight)
+    //    {
+    //        // update max height
+    //        iheight = height;
+    //    }
+    //    if (start == end)
+    //    {
+    //        KDNode* newRoot = new KDNode(points.at(start));
+    //        newRoot->left = nullptr;
+    //        newRoot->right = nullptr;
+    //        isize++;
+    //        return newRoot;
+    //    }
+    //    if (d >= numDim)
+    //    {
+    //        // toggle the dimension
+    //        d = 0;
+    //    }
 
-        CompareValueAt comparator = CompareValueAt(d);
-        // initial sorting for all the points
-        sort(points.begin() + start, points.begin() + end + 1,
-            comparator);
-        int median = (end + start) / 2;
+    //    CompareValueAt comparator = CompareValueAt(d);
+    //    // initial sorting for all the points
+    //    sort(points.begin() + start, points.begin() + end + 1,
+    //        comparator);
+    //    int median = (end + start) / 2;
 
-        KDNode* newRoot = new KDNode(points.at(median));
-        isize++;
-        // recursively call, start is inclusive, end is exclusive
-        newRoot->left = buildSubtree2(points, start, median - 1, d + 1,
-            height + 1);
-        if (newRoot->left != nullptr) {
-            newRoot->left->parent = newRoot;
-        }
+    //    KDNode* newRoot = new KDNode(points.at(median));
+    //    isize++;
+    //    // recursively call, start is inclusive, end is exclusive
+    //    newRoot->left = buildSubtree2(points, start, median - 1, d + 1,
+    //        height + 1);
+    //    if (newRoot->left != nullptr) {
+    //        newRoot->left->parent = newRoot;
+    //    }
 
-        newRoot->right = buildSubtree2(points, median + 1, end, d + 1,
-            height + 1);
+    //    newRoot->right = buildSubtree2(points, median + 1, end, d + 1,
+    //        height + 1);
 
-        if (newRoot->right != nullptr) {
-            newRoot->right->parent = newRoot;
-        }
+    //    if (newRoot->right != nullptr) {
+    //        newRoot->right->parent = newRoot;
+    //    }
 
-        return newRoot;
+    //    return newRoot;
 
-    }
+    //}
 
 
 
@@ -248,30 +248,30 @@ private:
     }
 
 
-    void findKNNHelperAll(KDNode * node, const Point & queryPoint, unsigned int d) {
-        // leaf node situation
-        if (node->left == nullptr && node->right == nullptr) {
-            // checking square distance
+    //void findKNNHelperAll(KDNode * node, const Point & queryPoint, unsigned int d) {
+    //    // leaf node situation
+    //    if (node->left == nullptr && node->right == nullptr) {
+    //        // checking square distance
 
-            node->point.setSquareDistToQuery(queryPoint);
-            updateKNN(node->point);
-            return;
-        }
+    //        node->point.setSquareDistToQuery(queryPoint);
+    //        updateKNN(node->point);
+    //        return;
+    //    }
 
-        if (node->left) {
-            // recursively go left
-            findKNNHelperAll(node->left, queryPoint, incrementD(d));
-        }
+    //    if (node->left) {
+    //        // recursively go left
+    //        findKNNHelper(node->left, queryPoint, incrementD(d));
+    //    }
 
-        if (node->right) {
-            // recursively go right
-            findKNNHelperAll(node->right, queryPoint, incrementD(d));
-        }
+    //    if (node->right) {
+    //        // recursively go right
+    //        findKNNHelper(node->right, queryPoint, incrementD(d));
+    //    }
 
-        node->point.setSquareDistToQuery(queryPoint);
-        updateKNN(node->point);
-     
-    }
+    //    node->point.setSquareDistToQuery(queryPoint);
+    //    updateKNN(node->point);
+    // 
+    //}
 
 
     void findKNNHelper(KDNode * node, const Point & queryPoint, unsigned int d) {
@@ -279,6 +279,10 @@ private:
             // no neighbor!! 
             // sad lonely guy
             return;
+        }
+        if(KNeighbors.size() == k)
+        {
+            threshold = KNeighbors.top().squareDistToQuery;
         }
         // leaf node situation
         if (node->left == nullptr && node->right == nullptr) {
