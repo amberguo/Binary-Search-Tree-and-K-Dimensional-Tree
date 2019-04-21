@@ -1,3 +1,9 @@
+/**
+ * Name: Yingshan Guo
+ * Email: yig152@ucsd.edu
+ * Reference: Piazza
+ * Date: 4/20/2019
+ */
 #ifndef KDT_HPP
 #define KDT_HPP
 
@@ -41,7 +47,7 @@ protected:
     unsigned int isize;
     unsigned int iheight;
 
-    // using priority queue
+    // using priority queue to store KNN
     struct distanceComp
     {
         bool operator()(const Point& lhs, const Point& rhs) const

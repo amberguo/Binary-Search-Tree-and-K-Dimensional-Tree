@@ -1,4 +1,9 @@
-
+/**
+ * Name: Yingshan Guo
+ * Email: yig152@ucsd.edu
+ * Reference: Piazza
+ * Date: 4/17/2019
+ */
 #ifndef Point_hpp
 #define Point_hpp
 
@@ -22,8 +27,11 @@ public:
     /** Default constructor */
     Point() {}
     
-    /** TODO: Constructor that defines a data point with features and certain 
-    label */
+    /**
+     * Constructor with specific features and label
+     * @param features To be passed into new Point
+     * @param label To be passed into new Point
+     */
     Point(vector<double> features, int label)
     {
         this->features = features;
@@ -34,19 +42,18 @@ public:
     }
     
     /** Set the square distance to current query point 
-     * formula: d^2 = (x1-x2)^2 + (y1-y2)^2 + ....
+     * @param queryPoint Distance between this point and queryPoint
      */
     void setSquareDistToQuery(const Point& queryPoint) {
-        // TODO
         vector<double> queryFeatures = queryPoint.features;
         double dSquare = 0;
         for(int i = 0; i< numDim; i++)
         {
+            // formula: d ^ 2 = (x1 - x2) ^ 2 + (y1 - y2) ^ 2 + ....
             dSquare = dSquare + 
                       pow((features.at(i) - queryFeatures.at(i)), 2);
         }
         squareDistToQuery = dSquare;
-
     }
     
     /** Equals operator */

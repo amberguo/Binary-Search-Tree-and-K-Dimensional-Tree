@@ -1,3 +1,9 @@
+/**
+ * Name: Yingshan Guo
+ * Email: yig152@ucsd.edu
+ * Reference: Piazza
+ * Date: 4/20/2019
+ */
 #include <iostream>
 #include <stdlib.h>
 #include <vector>
@@ -54,7 +60,6 @@ vector<Point> readData(const char * fileName, bool withLabel) {
             result.push_back(Point(features, label));
         }
     }
-    
     in.close();
     return result;
 }

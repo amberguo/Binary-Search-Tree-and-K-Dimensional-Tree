@@ -81,3 +81,38 @@ that the BST is no longer balanced.
 4. How does the validation error change when K goes from 5 to 30? (5, 10, 15 
 ... 30) Make sure you include the specific output messages in your answer.
 
+  K: 5, Validation Error: 0.095
+  K: 10, Validation Error: 0.102
+  K: 15, Validation Error: 0.108
+  K: 20, Validation Error: 0.109
+  K: 30, Validation Error: 0.13
+The validation error rises slowly.
+
+5. Based on the information above, find the value of k such that the validation 
+error is lowest. 
+
+  when K = 1, the error is lowest.
+  K: 1, Validation Error: 0.082
+
+
+
+6. Run the program, then paste the printed result into the file. How much does 
+the KD tree outperform the Brute Force approach?
+
+Training data size: 10000; Test data size: 10000; Dimension size: 2; K: 1; 
+Time taken for KD tree to find KNN: 1193215062 milliseconds
+Training data size: 10000; Test data size: 10000; Dimension size: 2; K: 1; 
+Time taken for brute force approach to find KNN: 450065654543 milliseconds
+
+
+7. Do some research on the limitation of KD Tree, and try to find the values 
+of 4 constants above such that KD Tree is slower than Brute Force KNN. You must 
+include the printed messages in your answer. Your NUM_TRA and NUM_TEST should 
+be at least 10000 in order to give reasonable results (small size input does 
+not really show the difference).
+
+
+
+8. Play with values of 4 constants and show one additional finding with your 
+detailed explanation (you should first expect what the result is before playing 
+with specific values).
