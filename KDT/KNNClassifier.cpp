@@ -187,14 +187,12 @@ int main(int argc, const char * argv[]) {
             if( prediction != input.at(i).label)
             {
                 cout << "i is " << i;
-                cout << "first neighbor " << neighbors.at(0).squareDistToQuery << "second neighbor" << neighbors.at(1).squareDistToQuery;
-                cout << "square dist " << input.at(i).squareDistToQuery << endl;
+                cout << " first neighbor " << neighbors.at(0).squareDistToQuery << " second neighbor" << neighbors.at(1).squareDistToQuery << endl;
                 mismatch++;
             } else
             {
                 cout << "the correct i is " << i;
-                cout << "the correct first neighbor " << neighbors.at(0).squareDistToQuery << "the correct second neighbor" << neighbors.at(1).squareDistToQuery;
-                cout << "the correct square dist " << input.at(i).squareDistToQuery << endl;
+                cout << " the correct first neighbor " << neighbors.at(0).squareDistToQuery << " the correct second neighbor" << neighbors.at(1).squareDistToQuery << endl;
             }
         }
         //for (unsigned int i = 0; i < training.size(); i++)
