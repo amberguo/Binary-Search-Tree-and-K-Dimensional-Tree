@@ -99,7 +99,8 @@ public:
         //    haha.push_back(points.at(i));
         //}
         // build the tree by building left/right subtrees using recursion
-        root = buildSubtree2(points, 0, points.size(), 0, 0);
+        //root = buildSubtree(points, 0, points.size(), 0, 0);
+        root = buildSubtree2(points, 0, points.size()-1, 0, 0);
         // decrement the height to exclude the null node at the end of paths
         //iheight--;
         //inorderRec(root);
