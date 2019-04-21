@@ -186,6 +186,7 @@ int main(int argc, const char * argv[]) {
             int prediction = mostFreqLabel(neighbors);
             if( prediction != input.at(i).label)
             {
+                cout << "i is " << i << endl;
                 mismatch++;
             }
         }
