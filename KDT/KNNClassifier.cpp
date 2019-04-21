@@ -187,7 +187,12 @@ int main(int argc, const char * argv[]) {
             if( prediction != input.at(i).label)
             {
                 cout << "i is " << i << endl;
+                cout << "square dist " << input.at(i).squareDistToQuery << endl;
                 mismatch++;
+            } else
+            {
+                cout << "the correct i is " << i << endl;
+                cout << "the correct square dist " << input.at(i).squareDistToQuery << endl;
             }
         }
         //for (unsigned int i = 0; i < training.size(); i++)
