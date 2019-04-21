@@ -260,12 +260,12 @@ private:
 
         if (node->left) {
             // recursively go left
-            findKNNHelper(node->left, queryPoint, incrementD(d));
+            findKNNHelperAll(node->left, queryPoint, incrementD(d));
         }
 
         if (node->right) {
             // recursively go right
-            findKNNHelper(node->right, queryPoint, incrementD(d));
+            findKNNHelperAll(node->right, queryPoint, incrementD(d));
         }
 
         node->point.setSquareDistToQuery(queryPoint);
