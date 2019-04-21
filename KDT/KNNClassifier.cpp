@@ -62,35 +62,35 @@ vector<Point> readData(const char * fileName, bool withLabel) {
 
 /** Find the most frequent label in the given set of points */
 int mostFreqLabel(vector<Point>& points) {
-    //int maxCount = 0;
-    //int mostFrequentLabel = -1;
-    //unordered_map<int, int> hash;
-    //for (unsigned int i = 0; i < points.size(); i++) {
-    //    hash[points.at(i).label]++;
-    //    if (hash[points.at(i).label] > maxCount) {
-    //        maxCount = hash[points.at(i).label];
-    //        mostFrequentLabel = points.at(i).label;
-    //    }
-    //}
-    //// check for same count/frequency
-    //for (unsigned int i = 0; i < points.size(); i++) {
-    //    // count is same 
-    //    if(hash[points.at(i).label] == maxCount)
-    //    {
-    //        // label is smaller, update
-    //        if(points.at(i).label < mostFrequentLabel)
-    //        {
-    //            mostFrequentLabel = points.at(i).label;
-    //        }
-    //    }
-    //}
-    //return mostFrequentLabel;
-    if (points.at(0).label < points.at(1).label)
-    {
-        return points.at(0).label;
+    int maxCount = 0;
+    int mostFrequentLabel = -1;
+    unordered_map<int, int> hash;
+    for (unsigned int i = 0; i < points.size(); i++) {
+        hash[points.at(i).label]++;
+        if (hash[points.at(i).label] > maxCount) {
+            maxCount = hash[points.at(i).label];
+            mostFrequentLabel = points.at(i).label;
+        }
     }
+    // check for same count/frequency
+    for (unsigned int i = 0; i < points.size(); i++) {
+        // count is same 
+        if(hash[points.at(i).label] == maxCount)
+        {
+            // label is smaller, update
+            if(points.at(i).label < mostFrequentLabel)
+            {
+                mostFrequentLabel = points.at(i).label;
+            }
+        }
+    }
+    return mostFrequentLabel;
+    //if (points.at(0).label < points.at(1).label)
+    //{
+    //    return points.at(0).label;
+    //}
 
-    return points.at(1).label;
+    //return points.at(1).label;
 }
 
 
