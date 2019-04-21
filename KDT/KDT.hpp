@@ -99,8 +99,8 @@ public:
         //    haha.push_back(points.at(i));
         //}
         // build the tree by building left/right subtrees using recursion
-        root = buildSubtree(points, 0, points.size(), 0, 0);
-        //root = buildSubtree2(points, 0, points.size()-1, 0, 0);
+        //root = buildSubtree(points, 0, points.size(), 0, 0);
+        root = buildSubtree2(points, 0, points.size()-1, 0, 0);
         // decrement the height to exclude the null node at the end of paths
         //iheight--;
         //inorderRec(root);
@@ -146,56 +146,56 @@ public:
 
 private:
 
-    //KDNode* buildSubtree2(vector<Point>& points, int start, int end, 
-    //                    unsigned int d, unsigned int height) {
-    //    if (start > end)
-    //    {
-    //        return nullptr;
-    //    }
-    //    if (height > iheight)
-    //    {
-    //        // update max height
-    //        iheight = height;
-    //    }
-    //    if (start == end)
-    //    {
-    //        KDNode* newRoot = new KDNode(points.at(start));
-    //        newRoot->left = nullptr;
-    //        newRoot->right = nullptr;
-    //        isize++;
-    //        return newRoot;
-    //    }
-    //    if (d >= numDim)
-    //    {
-    //        // toggle the dimension
-    //        d = 0;
-    //    }
+    KDNode* buildSubtree2(vector<Point>& points, int start, int end, 
+                        unsigned int d, unsigned int height) {
+        if (start > end)
+        {
+            return nullptr;
+        }
+        if (height > iheight)
+        {
+            // update max height
+            iheight = height;
+        }
+        if (start == end)
+        {
+            KDNode* newRoot = new KDNode(points.at(start));
+            newRoot->left = nullptr;
+            newRoot->right = nullptr;
+            isize++;
+            return newRoot;
+        }
+        if (d >= numDim)
+        {
+            // toggle the dimension
+            d = 0;
+        }
 
-    //    CompareValueAt comparator = CompareValueAt(d);
-    //    // initial sorting for all the points
-    //    sort(points.begin() + start, points.begin() + end + 1,
-    //        comparator);
-    //    int median = (end + start) / 2;
+        CompareValueAt comparator = CompareValueAt(d);
+        // initial sorting for all the points
+        sort(points.begin() + start, points.begin() + end + 1,
+            comparator);
+        int median = (end + start) / 2;
 
-    //    KDNode* newRoot = new KDNode(points.at(median));
-    //    isize++;
-    //    // recursively call, start is inclusive, end is exclusive
-    //    newRoot->left = buildSubtree2(points, start, median - 1, d + 1,
-    //        height + 1);
-    //    if (newRoot->left != nullptr) {
-    //        newRoot->left->parent = newRoot;
-    //    }
+        KDNode* newRoot = new KDNode(points.at(median));
+        isize++;
+        // recursively call, start is inclusive, end is exclusive
+        newRoot->left = buildSubtree2(points, start, median - 1, d + 1,
+            height + 1);
+        if (newRoot->left != nullptr) {
+            newRoot->left->parent = newRoot;
+        }
 
-    //    newRoot->right = buildSubtree2(points, median + 1, end, d + 1,
-    //        height + 1);
+        newRoot->right = buildSubtree2(points, median + 1, end, d + 1,
+            height + 1);
 
-    //    if (newRoot->right != nullptr) {
-    //        newRoot->right->parent = newRoot;
-    //    }
+        if (newRoot->right != nullptr) {
+            newRoot->right->parent = newRoot;
+        }
 
-    //    return newRoot;
+        return newRoot;
 
-    //}
+    }
 
 
 
