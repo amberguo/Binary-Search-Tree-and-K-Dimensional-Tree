@@ -99,7 +99,7 @@ public:
         //    haha.push_back(points.at(i));
         //}
         // build the tree by building left/right subtrees using recursion
-        root = buildSubtree2(points, 0, points.size()-1, 0, 0);
+        root = buildSubtree(points, 0, points.size(), 0, 0);
         // decrement the height to exclude the null node at the end of paths
         //iheight--;
         //inorderRec(root);
@@ -193,6 +193,10 @@ private:
     /** Helper method to recursively build the subtree of KD tree. */
     KDNode* buildSubtree(vector<Point>& points, unsigned int start,
         unsigned int end, unsigned int d, unsigned int height) {
+        if (start >= end)
+        {
+            return nullptr;
+        }
         if (points.empty())
         {
             // null check
@@ -209,23 +213,16 @@ private:
             d = 0;
         }
 
-        if (start == end)
-        {
-            KDNode* newRoot = new KDNode(points.at(start));
-            isize++;
-            // base case for recursion
-            return newRoot;
-        }
         CompareValueAt comparator = CompareValueAt(d);
         // initial sorting for all the points
-        sort(points.begin() + start, points.begin() + end +1 , 
+        sort(points.begin() + start, points.begin() + end, 
             comparator);
         int median = (end + start) / 2;
 
         KDNode* newRoot = new KDNode(points.at(median));
         isize++;
         // recursively call, start is inclusive, end is exclusive
-        newRoot->left = buildSubtree(points, start, median - 1, d + 1, 
+        newRoot->left = buildSubtree(points, start, median, d + 1, 
                                height + 1);
         if (newRoot->left != nullptr) {
             newRoot->left->parent = newRoot;
