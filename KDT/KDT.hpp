@@ -160,6 +160,8 @@ private:
         if (start == end)
         {
             KDNode* newRoot = new KDNode(points.at(start));
+            newRoot->left = nullptr;
+            newRoot->right = nullptr;
             isize++;
             return newRoot;
         }
