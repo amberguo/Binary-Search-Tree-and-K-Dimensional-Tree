@@ -190,10 +190,11 @@ int main(int argc, const char * argv[]) {
         // test
         // Each line of the input data file should contain only the features of 
         // this data, no label following.
+        vector<Point> training = readData(argv[2], false);
         vector<Point> input = readData(argv[3], false);
         vector<Point> neighbors;
         KDT tree = KDT();
-        tree.build(input);
+        tree.build(training);
 
         for (unsigned int i = 0; i < input.size(); i++)
         {
