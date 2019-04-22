@@ -65,7 +65,11 @@ vector<Point> readData(const char * fileName, bool withLabel) {
 }
 
 
-/** Find the most frequent label in the given set of points */
+/** Find the most frequent label in the given set of points 
+ * @param points The array of points that we need to find the most frequent 
+ * label with
+ * @return the most frequent label
+ */
 int mostFreqLabel(vector<Point>& points) {
     int maxCount = 0;
     int mostFrequentLabel = -1;
@@ -90,12 +94,6 @@ int mostFreqLabel(vector<Point>& points) {
         }
     }
     return mostFrequentLabel;
-    //if (points.at(0).label < points.at(1).label)
-    //{
-    //    return points.at(0).label;
-    //}
-
-    //return points.at(1).label;
 }
 
 
@@ -174,28 +172,14 @@ int main(int argc, const char * argv[]) {
             int prediction = mostFreqLabel(neighbors);
             if( prediction != input.at(i).label)
             {
-                /*cout << "i is " << i;
-                cout << " first neighbor " << neighbors.at(0).squareDistToQuery << " second neighbor" << neighbors.at(1).squareDistToQuery << endl;*/
+
                 mismatch++;
-            } else
-            {
-                /*cout << "the correct i is " << i;
-                cout << " the correct first neighbor " << neighbors.at(0).squareDistToQuery << " the correct second neighbor" << neighbors.at(1).squareDistToQuery << endl;*/
             }
         }
-        //for (unsigned int i = 0; i < training.size(); i++)
-        //{
-        //    vector<Point> neighbors = tree.findKNearestNeighbors(training.at(i), k);
-        //    int prediction = mostFreqLabel(neighbors);
-        //    if (prediction != training.at(i).label)
-        //    {
-        //        mismatch++;
-        //    }
-        //}
-        // TODO double or float
-        cout << "mismatch is " << mismatch << endl;
+        // counting the validation error
         double error = mismatch / input.size();
 
+        // write into file
         std::ofstream file;
         file.open("result.txt", std::ios_base::app);
         file << "K: " << k << ", Validation Error: " << error << endl;
@@ -214,6 +198,7 @@ int main(int argc, const char * argv[]) {
         for (unsigned int i = 0; i < input.size(); i++)
         {
             neighbors = tree.findKNearestNeighbors(input.at(i), k);
+            // write into file
             int label = mostFreqLabel(neighbors);
             std::ofstream file;
             file.open("result.txt", std::ios_base::app);

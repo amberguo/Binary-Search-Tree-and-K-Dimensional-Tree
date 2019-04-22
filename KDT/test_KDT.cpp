@@ -85,10 +85,6 @@ int run_tests(vector<Point>& kdt_build_points,
   for (; test_it != test_cases.end() && solution_it != solutions.end();
        test_it++, solution_it++) {
     // my add
-    if((*test_it).features[0] == 100)
-    {
-        cout << "haha" << endl;
-    }
     
     vector<double> a;
     a.push_back(1);
@@ -200,6 +196,7 @@ int main(int argc, char* argv[])
 
   int error_count = custom_tests();
     //+ empty_test() + exhaustive_tests();
+  
   
     
 

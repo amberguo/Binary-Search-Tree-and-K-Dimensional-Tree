@@ -64,6 +64,7 @@ public:
         root = nullptr;
         isize = 0;
         iheight = 0;
+        KNeighbors = priority_queue<Point, std::vector<Point>, distanceComp>();
         threshold = std::numeric_limits<double>::infinity();
         k = 0;
         numDim = 0;
