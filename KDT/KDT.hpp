@@ -82,7 +82,6 @@ public:
         {
             KNeighbors.pop();
         }
-        KNeighbors = priority_queue<Point, std::vector<Point>, distanceComp>();
         deleteAll(root);
     }
 
