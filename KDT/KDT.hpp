@@ -4,6 +4,7 @@
  * Reference: Piazza
  * Date: 4/20/2019
  */
+
 #ifndef KDT_HPP
 #define KDT_HPP
 
@@ -211,7 +212,8 @@ private:
      * @param queryPoint Target point
      * @param d Current dimension
      */
-    void findKNNHelper(KDNode * node, const Point & queryPoint, unsigned int d) {
+    void findKNNHelper(KDNode * node, const Point & queryPoint, unsigned int d) 
+    {
         if (node == nullptr) {
             // no neighbor!! 
             // sad lonely guy
