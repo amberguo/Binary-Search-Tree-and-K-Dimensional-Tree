@@ -99,7 +99,6 @@ public:
             k = 0;
             numDim = 0;
             return;
-
         }
         else
         {
@@ -154,7 +153,8 @@ private:
     KDNode* buildSubtree(vector<Point>& points, int start, int end, 
                         unsigned int d, unsigned int height) {
         if (start > end)
-        {
+        {   
+            // base case
             return nullptr;
         }
         if (height > iheight)
@@ -202,64 +202,6 @@ private:
 
         return newRoot;
     }
-
-
-
-    /** Helper method to recursively build the subtree of KD tree. 
-     * @param points Series of points
-     * @param start Start point in the vector
-     * @param end End point in the vector
-     * @param d Current dimension
-     * @param height Current height
-     * @return new node created in this recursion
-     */
-    //KDNode* buildSubtree2(vector<Point>& points, unsigned int start,
-    //    unsigned int end, unsigned int d, unsigned int height) {
-    //    if (start >= end)
-    //    {
-    //        return nullptr;
-    //    }
-    //    if (points.empty())
-    //    {
-    //        // null check
-    //        return nullptr;
-    //    }
-    //    if (height > iheight)
-    //    {
-    //        // update max height
-    //        iheight = height;
-    //    }
-    //    if (d >= numDim)
-    //    {
-    //        // toggle the dimension
-    //        d = 0;
-    //    }
-
-    //    CompareValueAt comparator = CompareValueAt(d);
-    //    // initial sorting for all the points
-    //    sort(points.begin() + start, points.begin() + end, 
-    //        comparator);
-    //    int median = (end + start) / 2;
-
-    //    KDNode* newRoot = new KDNode(points.at(median));
-    //    isize++;
-    //    // recursively call, start is inclusive, end is exclusive
-    //    // build left subtree
-    //    newRoot->left = buildSubtree(points, start, median, d + 1, 
-    //                           height + 1);
-    //    if (newRoot->left != nullptr) {
-    //        newRoot->left->parent = newRoot;
-    //    }
-    //    // build right subtree
-    //    newRoot->right = buildSubtree(points, median + 1, end, d + 1, 
-    //                                 height + 1);
-
-    //    if (newRoot->right != nullptr) {
-    //        newRoot->right->parent = newRoot;
-    //    }
-
-    //    return newRoot;
-    //}
 
 
     /**
