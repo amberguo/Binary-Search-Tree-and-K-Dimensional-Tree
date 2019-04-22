@@ -168,7 +168,8 @@ int main(int argc, const char * argv[]) {
         vector<Point> input = readData(argv[3], true);
         for (unsigned int i = 0; i< input.size(); i++)
         {
-            vector<Point> neighbors = tree.findKNearestNeighbors(input.at(i), k);
+            vector<Point> neighbors = tree.findKNearestNeighbors(input.at(i), 
+                                                                 k);
             int prediction = mostFreqLabel(neighbors);
             if( prediction != input.at(i).label)
             {
@@ -190,7 +191,7 @@ int main(int argc, const char * argv[]) {
         // test
         // Each line of the input data file should contain only the features of 
         // this data, no label following.
-        vector<Point> training = readData(argv[2], false);
+        vector<Point> training = readData(argv[2], true);
         vector<Point> input = readData(argv[3], false);
         vector<Point> neighbors;
         KDT tree = KDT();
@@ -201,6 +202,7 @@ int main(int argc, const char * argv[]) {
             neighbors = tree.findKNearestNeighbors(input.at(i), k);
             // write into file
             int label = mostFreqLabel(neighbors);
+
             std::ofstream file;
             file.open("result.txt", std::ios_base::app);
             file << label << endl;
