@@ -150,6 +150,3 @@ As the dimension size increases, the limitation of KDT is shown. In that
 situation, the search radius (threshold) is likely to intersect a lot of 
 hypercubes (because we have a large dimension), which we need to check lots of 
 points to get the KNN.
-
-
-
