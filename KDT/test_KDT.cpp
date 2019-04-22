@@ -198,7 +198,8 @@ int main(int argc, char* argv[])
     return -1;
   }
 
-  int error_count = custom_tests() + empty_test() + exhaustive_tests();
+  int error_count = custom_tests();
+    //+ empty_test() + exhaustive_tests();
   
     
 
