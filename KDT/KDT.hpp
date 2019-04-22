@@ -77,6 +77,7 @@ public:
         threshold = std::numeric_limits<double>::infinity();
         k = 0;
         numDim = 0;
+        KNeighbors = priority_queue<Point, std::vector<Point>, distanceComp>();
         deleteAll(root);
     }
 
@@ -103,7 +104,6 @@ public:
         }
         // build the tree by building left/right subtrees using recursion
         root = buildSubtree(points, 0, points.size()-1, 0, 0);
-        //root = buildSubtree2(points, 0, points.size()-1, 0, 0);
     }
 
     /** Find k nearest neighbors of the given query point 
@@ -374,6 +374,7 @@ private:
         }
         delete n;
     }
+
 
 };
 
