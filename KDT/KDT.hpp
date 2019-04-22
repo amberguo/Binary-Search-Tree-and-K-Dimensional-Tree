@@ -78,6 +78,10 @@ public:
         threshold = std::numeric_limits<double>::infinity();
         k = 0;
         numDim = 0;
+        while(KNeighbors.empty())
+        {
+            KNeighbors.pop();
+        }
         KNeighbors = priority_queue<Point, std::vector<Point>, distanceComp>();
         deleteAll(root);
     }
@@ -365,14 +369,8 @@ private:
         }
         // post order deleting
         // left-right-root
-        if (n->left != nullptr)
-        {
-            deleteAll(n->left);
-        }
-        if (n->right != nullptr)
-        {
-            deleteAll(n->right);
-        }
+        deleteAll(n->left);
+        deleteAll(n->right);
         delete n;
     }
 
