@@ -111,6 +111,17 @@ include the printed messages in your answer. Your NUM_TRA and NUM_TEST should
 be at least 10000 in order to give reasonable results (small size input does 
 not really show the difference).
 
+[cs100sp19de@ieng6-240]:KDT:514$ ./runtime
+Training data size: 10000; Test data size: 10000; Dimension size: 2; K: 10000;
+Time taken for KD tree to find KNN: 723426727126 milliseconds
+Training data size: 10000; Test data size: 10000; Dimension size: 2; K: 10000; 
+Time taken for brute force approach to find KNN: 678082569754 milliseconds
+
+When k is big, or similar to the size of data, the advantage of KDT is lost,
+because we will waste time on building the tree and then search for k neighbors,
+but intead just go over all the node linearly and store them into kneighbors 
+will be more efficient.
+
 
 
 8. Play with values of 4 constants and show one additional finding with your 

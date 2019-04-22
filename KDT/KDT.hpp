@@ -182,21 +182,22 @@ private:
         KDNode* newRoot = new KDNode(points.at(median));
         isize++;
         // recursively call, start is inclusive, end is exclusive
+        // build left subtree
         newRoot->left = buildSubtree(points, start, median - 1, d + 1,
             height + 1);
+        // connect with parent
         if (newRoot->left != nullptr) {
             newRoot->left->parent = newRoot;
         }
-
+        // build right subtree
         newRoot->right = buildSubtree(points, median + 1, end, d + 1,
             height + 1);
-
+        // connect with parent
         if (newRoot->right != nullptr) {
             newRoot->right->parent = newRoot;
         }
 
         return newRoot;
-
     }
 
 
@@ -257,31 +258,6 @@ private:
     //    return newRoot;
     //}
 
-
-    //void findKNNHelperAll(KDNode * node, const Point & queryPoint, unsigned int d) {
-    //    // leaf node situation
-    //    if (node->left == nullptr && node->right == nullptr) {
-    //        // checking square distance
-
-    //        node->point.setSquareDistToQuery(queryPoint);
-    //        updateKNN(node->point);
-    //        return;
-    //    }
-
-    //    if (node->left) {
-    //        // recursively go left
-    //        findKNNHelper(node->left, queryPoint, incrementD(d));
-    //    }
-
-    //    if (node->right) {
-    //        // recursively go right
-    //        findKNNHelper(node->right, queryPoint, incrementD(d));
-    //    }
-
-    //    node->point.setSquareDistToQuery(queryPoint);
-    //    updateKNN(node->point);
-    // 
-    //}
 
     /**
      * Helper method of findKNN
