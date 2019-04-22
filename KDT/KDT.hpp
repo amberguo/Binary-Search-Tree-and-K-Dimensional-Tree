@@ -72,7 +72,6 @@ public:
     // destructor of KDT
     ~KDT()
     {
-        root = nullptr;
         isize = 0;
         iheight = 0;
         threshold = std::numeric_limits<double>::infinity();
