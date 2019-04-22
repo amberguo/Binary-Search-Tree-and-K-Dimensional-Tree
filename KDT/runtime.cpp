@@ -34,8 +34,8 @@ int main(int argc, const char * argv[]) {
     // TODO: value to change to do experiments
     const int NUM_TRA = 10000; // number of random training data
     const int NUM_TEST = 10000; // number of random validation data
-    const int NUM_DIM = 1000;
-    const int K = 1;
+    const int NUM_DIM = 2;
+    const int K = 10000;
     
     KDT kdtree;
     BruteForceKNN bfknn;

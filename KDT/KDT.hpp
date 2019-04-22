@@ -81,7 +81,9 @@ public:
     }
 
 
-    /** Build the KD tree from the given vector of Point references */
+    /** Build the KD tree from the given vector of Point references
+     *  @param points Points to build KD tree
+     */
     void build(vector<Point>& points) {
         if (points.empty())
         {
@@ -99,39 +101,22 @@ public:
         {
             numDim = points.at(0).numDim;
         }
-        //vector<Point> haha;
-        //for(unsigned int i =0; i< points.size()-1; i++)
-        //{
-        //    haha.push_back(points.at(i));
-        //}
         // build the tree by building left/right subtrees using recursion
-        root = buildSubtree(points, 0, points.size(), 0, 0);
+        root = buildSubtree(points, 0, points.size()-1, 0, 0);
         //root = buildSubtree2(points, 0, points.size()-1, 0, 0);
-        // decrement the height to exclude the null node at the end of paths
-        //iheight--;
-        //inorderRec(root);
     }
 
-    /** Find k nearest neighbors of the given query point */
+    /** Find k nearest neighbors of the given query point 
+     * @param queryPoint To point to be searched
+     * @param k The number of neighbors to be stored
+     * @return vector contains k neighbors
+     */
     vector<Point> findKNearestNeighbors(Point queryPoint, unsigned int k) {
         this->k = k;
         threshold = std::numeric_limits<double>::infinity();
         findKNNHelper(root, queryPoint, 0);
 
-        //if (KNeighbors.size() == k + 1)
-        //{
-        //    Point tmp = KNeighbors.top();
-        //    KNeighbors.pop();
-        //}
-        //if(KNeighbors.size() > k)
-        //{
-        //    unsigned int diff = k - KNeighbors.size();
-        //    for (unsigned int i = 0; i < k; i++)
-        //    {
-        //        KNeighbors.pop();
-        //    }
-        //}
-
+        // grab points from pq to vector
         vector<Point> res;
         while (!KNeighbors.empty()) {
             res.push_back(std::move(const_cast<Point&>(KNeighbors.top())));
@@ -140,19 +125,30 @@ public:
         return res;
     }
 
-    /** Return the size of the KD tree */
+    /** Return the size of the KD tree 
+     * @return size of KDT
+     */
     unsigned int size() {
         return isize;
     }
 
-    /** Return the height of the KD tree */
+    /** Return the height of the KD tree 
+     * @return height of KDT
+     */
     unsigned int height() {
         return iheight;
     }
 
 private:
-
-    KDNode* buildSubtree2(vector<Point>& points, int start, int end, 
+    /** Helper method to recursively build the subtree of KD tree.
+     * @param points Series of points
+     * @param start Start point in the vector
+     * @param end End point in the vector
+     * @param d Current dimension
+     * @param height Current height
+     * @return new node created in this recursion
+     */
+    KDNode* buildSubtree(vector<Point>& points, int start, int end, 
                         unsigned int d, unsigned int height) {
         if (start > end)
         {
@@ -186,13 +182,13 @@ private:
         KDNode* newRoot = new KDNode(points.at(median));
         isize++;
         // recursively call, start is inclusive, end is exclusive
-        newRoot->left = buildSubtree2(points, start, median - 1, d + 1,
+        newRoot->left = buildSubtree(points, start, median - 1, d + 1,
             height + 1);
         if (newRoot->left != nullptr) {
             newRoot->left->parent = newRoot;
         }
 
-        newRoot->right = buildSubtree2(points, median + 1, end, d + 1,
+        newRoot->right = buildSubtree(points, median + 1, end, d + 1,
             height + 1);
 
         if (newRoot->right != nullptr) {
@@ -205,53 +201,61 @@ private:
 
 
 
-    /** Helper method to recursively build the subtree of KD tree. */
-    KDNode* buildSubtree(vector<Point>& points, unsigned int start,
-        unsigned int end, unsigned int d, unsigned int height) {
-        if (start >= end)
-        {
-            return nullptr;
-        }
-        if (points.empty())
-        {
-            // null check
-            return nullptr;
-        }
-        if (height > iheight)
-        {
-            // update max height
-            iheight = height;
-        }
-        if (d >= numDim)
-        {
-            // toggle the dimension
-            d = 0;
-        }
+    /** Helper method to recursively build the subtree of KD tree. 
+     * @param points Series of points
+     * @param start Start point in the vector
+     * @param end End point in the vector
+     * @param d Current dimension
+     * @param height Current height
+     * @return new node created in this recursion
+     */
+    //KDNode* buildSubtree2(vector<Point>& points, unsigned int start,
+    //    unsigned int end, unsigned int d, unsigned int height) {
+    //    if (start >= end)
+    //    {
+    //        return nullptr;
+    //    }
+    //    if (points.empty())
+    //    {
+    //        // null check
+    //        return nullptr;
+    //    }
+    //    if (height > iheight)
+    //    {
+    //        // update max height
+    //        iheight = height;
+    //    }
+    //    if (d >= numDim)
+    //    {
+    //        // toggle the dimension
+    //        d = 0;
+    //    }
 
-        CompareValueAt comparator = CompareValueAt(d);
-        // initial sorting for all the points
-        sort(points.begin() + start, points.begin() + end, 
-            comparator);
-        int median = (end + start) / 2;
+    //    CompareValueAt comparator = CompareValueAt(d);
+    //    // initial sorting for all the points
+    //    sort(points.begin() + start, points.begin() + end, 
+    //        comparator);
+    //    int median = (end + start) / 2;
 
-        KDNode* newRoot = new KDNode(points.at(median));
-        isize++;
-        // recursively call, start is inclusive, end is exclusive
-        newRoot->left = buildSubtree(points, start, median, d + 1, 
-                               height + 1);
-        if (newRoot->left != nullptr) {
-            newRoot->left->parent = newRoot;
-        }
+    //    KDNode* newRoot = new KDNode(points.at(median));
+    //    isize++;
+    //    // recursively call, start is inclusive, end is exclusive
+    //    // build left subtree
+    //    newRoot->left = buildSubtree(points, start, median, d + 1, 
+    //                           height + 1);
+    //    if (newRoot->left != nullptr) {
+    //        newRoot->left->parent = newRoot;
+    //    }
+    //    // build right subtree
+    //    newRoot->right = buildSubtree(points, median + 1, end, d + 1, 
+    //                                 height + 1);
 
-        newRoot->right = buildSubtree(points, median + 1, end, d + 1, 
-                                     height + 1);
+    //    if (newRoot->right != nullptr) {
+    //        newRoot->right->parent = newRoot;
+    //    }
 
-        if (newRoot->right != nullptr) {
-            newRoot->right->parent = newRoot;
-        }
-
-        return newRoot;
-    }
+    //    return newRoot;
+    //}
 
 
     //void findKNNHelperAll(KDNode * node, const Point & queryPoint, unsigned int d) {
@@ -279,7 +283,13 @@ private:
     // 
     //}
 
-
+    /**
+     * Helper method of findKNN
+     * Recursively find KNN and update pq
+     * @param node Current node
+     * @param queryPoint Target point
+     * @param d Current dimension
+     */
     void findKNNHelper(KDNode * node, const Point & queryPoint, unsigned int d) {
         if (node == nullptr) {
             // no neighbor!! 
@@ -304,39 +314,40 @@ private:
                 findKNNHelper(node->left, queryPoint, incrementD(d));
             }
 
+            // update threshold only if KNeighbors is full
             if (KNeighbors.size() == k)
-            {
                 threshold = KNeighbors.top().squareDistToQuery;
-            }
+            // check if go to alternative branch
             if (node->right && pow((node->point.features[d] -
                 queryPoint.features[d]), 2) < threshold)
-            {
                 findKNNHelper(node->right, queryPoint, incrementD(d));
-            }
 
-        }
-        else {
+        } else {
             // go right
             if (node->right) {
                 // recursively go right
                 findKNNHelper(node->right, queryPoint, incrementD(d));
             }
 
+            // update threshold only if KNeighbors is full
             if (KNeighbors.size() == k)
-            {
                 threshold = KNeighbors.top().squareDistToQuery;
-            }
 
+            // check if go to alternative branch
             if (node->left && pow((node->point.features[d] -
                 queryPoint.features[d]), 2) < threshold)
-            {
                 findKNNHelper(node->left, queryPoint, incrementD(d));
-            }
         }
+        // update curr (itself)
         node->point.setSquareDistToQuery(queryPoint);
         updateKNN(node->point);
     }
 
+    /**
+     * helper method to increment d
+     * @param d Dimension
+     * @return value after increment
+     */
     unsigned int incrementD(unsigned int d) {
         return (d + 1) % numDim;
     }
@@ -344,6 +355,7 @@ private:
 
     /** Helper method to update your data structure storing KNN using
      *  the given point.
+     *  @param point Point to be added into KNeighbors
      */
     void updateKNN(Point & point){
         if (KNeighbors.size() < this->k )
@@ -357,39 +369,6 @@ private:
                 KNeighbors.pop();
                 KNeighbors.push(point);
             }
-        }
-
-
-        //KNeighbors.push(point);
-        //if (KNeighbors.size() == k + 1)
-        //{
-        //    Point tmp = KNeighbors.top();
-        //    KNeighbors.pop();
-        //}
-    }
-
-    /** Helper method
-     * Inorder traverse BST, print out the data of each node in ascending order
-     * Implementing inorder and deleteAll base on the pseudo code is an easy
-     * way to get started.
-     * Pseudo Code:
-     * if current node is null: return;
-     * recursively traverse left sub-tree
-     * print current node data
-     * recursively traverse right sub-tree
-     * @param root Root of the tree
-     */
-    void inorderRec(KDNode * root) const {
-        while (root != nullptr)
-        {
-            // inorderly traverse and print out the data inside nodes
-            inorderRec(root->left);
-            for (unsigned int i = 0; i < (root->point.features.size()); i++)
-            {
-                cout << root->point.features.at(i) << endl;
-            }
-
-            inorderRec(root->right);
         }
     }
 

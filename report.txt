@@ -116,3 +116,29 @@ not really show the difference).
 8. Play with values of 4 constants and show one additional finding with your 
 detailed explanation (you should first expect what the result is before playing 
 with specific values).
+Training data size: 2; Test data size: 2; Dimension size: 5; K: 1; Time taken 
+for KD tree to find KNN: 65940 milliseconds
+Training data size: 2; Test data size: 2; Dimension size: 5; K: 1; Time taken 
+for brute force approach to find KNN: 55965 milliseconds
+
+For extremely small data size, the BruteForce way is more efficient than KDT.
+
+Training data size: 2; Test data size: 2; Dimension size: 100; K: 1; Time taken 
+for KD tree to find KNN: 198372 milliseconds
+Training data size: 2; Test data size: 2; Dimension size: 100; K: 1; Time taken
+for brute force approach to find KNN: 185073 milliseconds
+
+When dimension size increases, the KDT is less efficient than BruteForce.
+
+The reason behind the scene is that when data size is small, we need more time
+in KDT to construct the tree and then find KNN. Rather in BruteForce, we only
+traverse the array and find KNN, which saves us time of building the tree
+structure.
+
+As the dimension size increases, the limitation of KDT is shown. In that 
+situation, the search radius (threshold) is likely to intersect a lot of 
+hypercubes (because we have a large dimension), which we need to check lots of 
+points to get the KNN.
+
+
+
