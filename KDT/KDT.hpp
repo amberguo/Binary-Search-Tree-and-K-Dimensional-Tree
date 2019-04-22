@@ -77,7 +77,7 @@ public:
         threshold = std::numeric_limits<double>::infinity();
         k = 0;
         numDim = 0;
-        while(KNeighbors.empty())
+        while(!KNeighbors.empty())
         {
             KNeighbors.pop();
         }
